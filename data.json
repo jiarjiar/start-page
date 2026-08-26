@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:28:41",
+ "updated": "2026-08-26T13:45:03",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -58,13 +58,6 @@
    "pinned": false
   },
   {
-   "url": "https://scholar.google.com/citations?user=JZZimZAAAAAJ&hl=en",
-   "title": "‪Siwei Chen‬ - ‪Google Scholar‬",
-   "host": "scholar.google.com",
-   "folder": "文献",
-   "pinned": false
-  },
-  {
    "url": "https://www.nature.com/nature-index/",
    "title": "Nature Index",
    "host": "nature.com",
@@ -83,13 +76,6 @@
    "title": "Amazon.com. Spend less. Smile more.",
    "host": "amazon.com",
    "folder": "KE",
-   "pinned": false
-  },
-  {
-   "url": "https://docs.google.com/presentation/d/147buyMA1hVygLUVTwwN_Bvnw1wXIGWCA/edit?slide=id.g3a34b53359e_0_0",
-   "title": "Copy of UMD_progressRPT_Oct.pptx - Google Slides",
-   "host": "docs.google.com",
-   "folder": "work",
    "pinned": false
   },
   {
@@ -146,13 +132,6 @@
    "title": "Chrome Remote Desktop",
    "host": "remotedesktop.google.com",
    "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://login.stevens.edu/app/UserHome?iss=https%3A%2F%2Flogin.stevens.edu&session_hint=AUTHENTICATED",
-   "title": "login.stevens.edu",
-   "host": "login.stevens.edu",
-   "folder": "mobile",
    "pinned": false
   },
   {
@@ -268,13 +247,6 @@
    "pinned": false
   },
   {
-   "url": "https://my.uscis.gov/account/applicant",
-   "title": "USCIS Account - Home Page",
-   "host": "my.uscis.gov",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
    "url": "https://scholar.google.co.uk/scholar?as_q=&num=10&btnG=Search+Scholar&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=%22Zaiyao+Fei%22&as_publication=&as_ylo=&as_yhi=&as_allsubj=all&hl=en",
    "title": "author:\"Zaiyao Fei\" - Google Scholar",
    "host": "scholar.google.co.uk",
@@ -303,6 +275,13 @@
    "pinned": false
   },
   {
+   "url": "https://github.com/",
+   "title": "GitHub",
+   "host": "github.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
    "url": "https://pubs.acs.org/doi/abs/10.1021/acsphotonics.4c00255",
    "title": "Narrowband Quantum Light Emission from Oxygen-Related Color Centers in Hexagonal Boron Nitride | ACS Photonics",
    "host": "pubs.acs.org",
@@ -324,13 +303,6 @@
    "pinned": false
   },
   {
-   "url": "https://github.com/",
-   "title": "GitHub",
-   "host": "github.com",
-   "folder": "work",
-   "pinned": false
-  },
-  {
    "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
    "title": "onlinelibrary.wiley.com",
    "host": "onlinelibrary.wiley.com",
@@ -349,13 +321,6 @@
    "title": "DeepSeek 开放平台",
    "host": "platform.deepseek.com",
    "folder": "AI",
-   "pinned": false
-  },
-  {
-   "url": "https://mymva.maryland.gov/TAP/IND/_/",
-   "title": "Online Services - myMVA",
-   "host": "mymva.maryland.gov",
-   "folder": "其他",
    "pinned": false
   }
  ]
