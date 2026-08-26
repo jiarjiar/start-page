@@ -174,9 +174,9 @@ const LS_KEY = "sp_custom_v1";
 /* 定制图标: 部分站点 s2 服务返回通用 logo, 这里用官方图标替换 */
 const CUSTOM_ICONS = {
   "calendar.google.com": "https://api.iconify.design/logos:google-calendar.svg",
-  "maps.google.com": "https://maps.google.com/favicon.ico",
-  "mail.google.com": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico",
-  "drive.google.com": "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png",
+  "maps.google.com": "https://api.iconify.design/logos:google-maps.svg",
+  "mail.google.com": "https://api.iconify.design/logos:google-gmail.svg",
+  "drive.google.com": "https://api.iconify.design/logos:google-drive.svg",
   "translate.google.com": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
   "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
   "19x19.com": "https://19x19.com/favicon.ico",
@@ -231,13 +231,26 @@ function hashHue(s) {
   return h;
 }
 
+/* 图标三级候选: 定制表 > 站点根 favicon > s2 服务; 失败→字母色块 */
+function iconFallback(img) {
+  const stage = +(img.dataset.stage || 0);
+  if (stage === 0) {
+    img.dataset.stage = 1;
+    img.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(img.dataset.host) + "&sz=64";
+  } else {
+    img.remove();
+    img.parentElement.textContent = img.dataset.letter;
+  }
+}
+
 function cardHTML(it) {
   const hue = hashHue(it.host);
   const letter = (it.title || it.host || "?")[0].toUpperCase();
+  const src = CUSTOM_ICONS[it.host] || ("https://" + it.host + "/favicon.ico");
   const ico =
     `<div class="ico" style="background:hsl(${hue},55%,45%)">` +
-    `<img src="${CUSTOM_ICONS[it.host] || ("https://www.google.com/s2/favicons?domain=" + encodeURIComponent(it.host) + "&sz=64")}" ` +
-    `loading="lazy" onerror="this.remove();this.parentElement.textContent='${letter.replace(/'/g, "")}'">` +
+    `<img src="${src}" data-host="${encodeURIComponent(it.host)}" data-letter="${letter.replace(/'/g, "")}" data-stage="0" ` +
+    `loading="lazy" onerror="iconFallback(this)">` +
     `</div>`;
   const pin = it.pinned ? '<span class="pin">📌</span>' : "";
   const ops = editing
