@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:45:03",
+ "updated": "2026-08-26T13:46:16",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -219,13 +219,6 @@
    "pinned": false
   },
   {
-   "url": "https://www.stevens.edu/profile/sstrauf",
-   "title": "Stefan Strauf | Stevens Institute of Technology",
-   "host": "stevens.edu",
-   "folder": "work",
-   "pinned": false
-  },
-  {
    "url": "https://www.myworkday.com/umd/d/home.htmld",
    "title": "myworkday.com",
    "host": "myworkday.com",
@@ -244,13 +237,6 @@
    "title": "Nematicity with a twist: Rotational symmetry breaking in a moiré superlattice | Science Advances",
    "host": "science.org",
    "folder": "文献",
-   "pinned": false
-  },
-  {
-   "url": "https://scholar.google.co.uk/scholar?as_q=&num=10&btnG=Search+Scholar&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=%22Zaiyao+Fei%22&as_publication=&as_ylo=&as_yhi=&as_allsubj=all&hl=en",
-   "title": "author:\"Zaiyao Fei\" - Google Scholar",
-   "host": "scholar.google.co.uk",
-   "folder": "其他",
    "pinned": false
   },
   {
@@ -311,7 +297,7 @@
   },
   {
    "url": "https://outlook.cloud.microsoft/mail/",
-   "title": "Mail - Siwei Chen - Outlook",
+   "title": "Outlook",
    "host": "outlook.cloud.microsoft",
    "folder": "常用",
    "pinned": false
