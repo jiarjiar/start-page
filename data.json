@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:04:58",
+ "updated": "2026-08-26T13:09:17",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -14,6 +14,13 @@
    "host": "mail.google.com",
    "folder": "常用",
    "pinned": true
+  },
+  {
+   "url": "https://platform.kimi.ai/console/account",
+   "title": "Kimi API 平台",
+   "host": "platform.kimi.ai",
+   "folder": "AI",
+   "pinned": false
   },
   {
    "url": "https://calendar.google.com/calendar/u/4/r/week",

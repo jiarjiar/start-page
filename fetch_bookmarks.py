@@ -109,6 +109,11 @@ SPECIAL_FOLDER = {
     "linkedin.com": "社交",
 }
 
+# 手动补充的站点 (即使不在 TOP 50 也强制加入; 排序在置顶之后、普通之前)
+EXTRA_SITES = [
+    {"url": "https://platform.kimi.ai/console/account", "title": "Kimi API 平台", "folder": "AI"},
+]
+
 # 代表 URL 模板规则: host 后缀 → 目标 URL (命中即用, 优先级高于清理逻辑)
 REPRESENTATIVE = {
     "chatgpt.com": "https://chatgpt.com/",
@@ -346,9 +351,11 @@ def build_items(conn, limit, pins):
             }
         )
 
-    # 排序: 置顶优先(保持 pins.json 顺序) → 其余按访问量降序
+    # 排序: 置顶优先(保持 pins.json 顺序) → 手动补充 → 其余按访问量降序
     def sort_key(it):
-        v = max(x[1] for x in agg[it["host"]])
+        v = max((x[1] for x in agg.get(it["host"], [])), default=0)
+        if it.get("_extra"):
+            return (0.5, 0, 0)
         if it["pinned"]:
             idx = next(
                 (i for i, p in enumerate(pins) if matches_pin(it["url"], it["host"], p)), 99
@@ -357,7 +364,27 @@ def build_items(conn, limit, pins):
         return (1, 0, -v)
 
     items.sort(key=sort_key)
-    return items[:limit], agg
+    items = items[:limit]
+
+    # 手动补充站点: 先截断再按 host 去重 (Kimi 等可能已在全量列表里)
+    existing_hosts = {it["host"] for it in items}
+    for es in EXTRA_SITES:
+        h = norm_host(urlsplit(es["url"]).netloc)
+        if h in existing_hosts:
+            continue
+        existing_hosts.add(h)
+        items.append(
+            {
+                "url": es["url"],
+                "title": es["title"],
+                "host": h,
+                "folder": es.get("folder", "其他"),
+                "pinned": es.get("pinned", False),
+                "_extra": True,
+            }
+        )
+    items.sort(key=sort_key)  # 含 extras 重排 (排在置顶之后、普通之前)
+    return items, agg
 
 
 def main():
@@ -387,7 +414,7 @@ def main():
     print(f"{'访问':>6}  {'分类':<8}  {'代表URL':<45}  host")
     print("-" * 90)
     for it in items:
-        v = max(v for u, v, _ in agg[it["host"]])
+        v = max((x[1] for x in agg.get(it["host"], [])), default=0)
         flag = "📌" if it["pinned"] else "  "
         print(f"{flag}{v:>5}  {it['folder']:<8}  {it['url'][:44]:<45}  {it['host']}")
 
