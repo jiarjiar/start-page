@@ -229,6 +229,12 @@ const CUSTOM_ICONS = {
   "translate.google.com": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
   "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
   "19x19.com": "https://19x19.com/favicon.ico",
+  /* 以下站点 s2 服务有正版图标 (icon.horse 只给出字母图), 显式指定 */
+  "gemini.google.com": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64",
+  "chat.deepseek.com": "https://www.google.com/s2/favicons?domain=chat.deepseek.com&sz=64",
+  "platform.deepseek.com": "https://www.google.com/s2/favicons?domain=platform.deepseek.com&sz=64",
+  "ollama.com": "https://www.google.com/s2/favicons?domain=ollama.com&sz=64",
+  "chatgpt.com": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64",
 };
 
 /* 三大栏目: folder → 栏目索引 */
@@ -280,12 +286,12 @@ function hashHue(s) {
   return h;
 }
 
-/* 图标三级候选: 定制表 > 站点根 favicon > s2 服务; 失败→字母色块 */
+/* 图标候选链: 定制表 > 站点根 favicon > icon.horse(高清) > 字母色块 */
 function iconFallback(img) {
   const stage = +(img.dataset.stage || 0);
   if (stage === 0) {
     img.dataset.stage = 1;
-    img.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(img.dataset.host) + "&sz=64";
+    img.src = "https://icon.horse/icon/" + img.dataset.host;
   } else {
     img.remove();
     img.parentElement.textContent = img.dataset.letter;
