@@ -142,6 +142,33 @@ def matches_pin(url: str, host: str, pin: str) -> bool:
         return url.startswith(pin)
     return host == pin
 
+
+def load_custom() -> dict:
+    """读取 custom.json: 隐藏/改名/换链接 规则 (可由网页编辑模式导出)。"""
+    custom = {"hidden": [], "rename": {}, "override_url": {}}
+    f = Path("custom.json")
+    if f.is_file():
+        try:
+            custom.update(json.loads(f.read_text()))
+        except Exception as e:
+            print(f"⚠️ custom.json 解析失败({e}), 忽略")
+    return custom
+
+
+def apply_custom(items: list, custom: dict) -> list:
+    """应用隐藏/改名/换链接规则。"""
+    out = []
+    for it in items:
+        if any(matches_pin(it["url"], it["host"], h) for h in custom.get("hidden", [])):
+            continue
+        it = dict(it)
+        if it["host"] in custom.get("rename", {}):
+            it["title"] = custom["rename"][it["host"]]
+        if it["host"] in custom.get("override_url", {}):
+            it["url"] = custom["override_url"][it["host"]]
+        out.append(it)
+    return out
+
 # ---------------------------------------------------------------- 工具函数 ---
 
 
@@ -408,6 +435,9 @@ def main():
         items, agg = build_items(conn, args.limit, pins)
     finally:
         conn.close()
+
+    custom = load_custom()
+    items = apply_custom(items, custom)
 
     # 预览(仅本地打印, 不写入 data.json)
     print(f"✅ 共 {len(items)} 条 (来自 {len(agg)} 个域名)")

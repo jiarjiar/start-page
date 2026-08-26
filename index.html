@@ -9,12 +9,14 @@
   --bg: #f6f8fa; --panel: #ffffff; --border: #d0d7de;
   --text: #1f2328; --muted: #656d76; --accent: #0969da;
   --card-border: #d0d7de; --chip-bg: #eef1f4; --shadow: 0 1px 2px rgba(0,0,0,.06);
+  --danger: #d1242f; --op: rgba(255,255,255,.92); --op-border: #d0d7de;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0d1117; --panel: #161b22; --border: #30363d;
     --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
     --card-border: #21262d; --chip-bg: #21262d; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    --danger: #f85149; --op: rgba(22,27,34,.92); --op-border: #30363d;
   }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,11 +30,20 @@ header {
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
-  padding: 18px 20px 12px;
+  padding: 16px 20px 12px;
   display: flex; flex-direction: column; gap: 12px; align-items: center;
 }
+.hrow { display: flex; align-items: center; gap: 14px; }
 h1 { font-size: 20px; font-weight: 700; letter-spacing: .3px; }
 h1 .dot { color: var(--accent); }
+.btn {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--panel); color: var(--text);
+  transition: all .15s; user-select: none;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn.primary:hover { opacity: .9; color: #fff; }
 #search {
   width: min(560px, 100%); padding: 10px 16px 10px 40px;
   font-size: 15px; border: 1px solid var(--border); border-radius: 10px;
@@ -75,10 +86,48 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 .meta { min-width: 0; }
 .t { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .h { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-.pin {
-  position: absolute; top: 8px; right: 10px; font-size: 12px;
+.pin { position: absolute; top: 8px; right: 10px; font-size: 12px; }
+.card .ops {
+  position: absolute; top: -8px; right: -6px; display: none; gap: 4px;
 }
+body.editing .card:hover { border-color: var(--accent); }
+body.editing .card:hover .ops { display: flex; }
+.card .ops button {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--op-border);
+  background: var(--op); color: var(--text); font-size: 13px; cursor: pointer;
+  box-shadow: var(--shadow); transition: transform .1s;
+}
+.card .ops button:hover { transform: scale(1.15); }
+.card .ops .hide:hover { background: var(--danger); color: #fff; }
 .empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 14px; }
+#hiddenbar {
+  max-width: 1080px; margin: 0 auto 30px; padding: 12px 16px;
+  border: 1px dashed var(--border); border-radius: 10px;
+  font-size: 13px; color: var(--muted); display: none;
+}
+#hiddenbar.show { display: block; }
+#hiddenbar .item {
+  display: inline-flex; align-items: center; gap: 6px; margin: 4px 6px 0 0;
+  padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--chip-bg); cursor: pointer; font-size: 12px;
+}
+#hiddenbar .item:hover { border-color: var(--accent); color: var(--accent); }
+dialog {
+  position: fixed; inset: 0; margin: auto; border: 1px solid var(--border);
+  border-radius: 14px; background: var(--panel); color: var(--text);
+  padding: 22px; width: min(420px, 90%); box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h3 { font-size: 16px; margin-bottom: 14px; }
+dialog label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+dialog input {
+  width: 100%; padding: 8px 10px; font-size: 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none;
+}
+dialog input:focus { border-color: var(--accent); }
+.dlg-actions { display: flex; gap: 8px; margin-top: 18px; }
+.dlg-actions .spacer { flex: 1; }
+dialog .hint { font-size: 11px; color: var(--muted); margin-top: 10px; }
 footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
 @media (max-width: 480px) {
   .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
@@ -88,17 +137,62 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
 </head>
 <body>
 <header>
-  <h1>🚀 我的常用导航<span class="dot">.</span></h1>
+  <div class="hrow">
+    <h1>🚀 我的常用导航<span class="dot">.</span></h1>
+    <button class="btn" id="editBtn" title="隐藏/修改链接">✏️ 编辑</button>
+    <button class="btn primary" id="exportBtn" style="display:none">📦 导出规则</button>
+    <button class="btn" id="doneBtn" style="display:none">✅ 完成</button>
+  </div>
   <input id="search" type="text" placeholder="搜索网站 / 域名…  (按 / 聚焦)" autocomplete="off">
   <div id="chips"></div>
 </header>
 <main id="main"></main>
+<div id="hiddenbar">
+  <b>😶 已隐藏的网站 (点一下恢复):</b>
+  <div id="hiddenlist" style="margin-top:6px"></div>
+</div>
+<dialog id="editdlg">
+  <h3>✏️ 编辑链接</h3>
+  <label>标题 (留空=恢复默认)</label>
+  <input id="e-title" type="text">
+  <label>网址 (留空=恢复默认)</label>
+  <input id="e-url" type="text">
+  <div class="dlg-actions">
+    <span class="spacer"></span>
+    <button class="btn" id="e-cancel">取消</button>
+    <button class="btn primary" id="e-save">保存</button>
+  </div>
+  <div class="hint">保存后存在本机浏览器 (localStorage); 点"📦 导出规则"可以永久写进项目。</div>
+</dialog>
 <footer>数据来自本地 Firefox · 自动生成 · 更新时运行 update.sh</footer>
 
 <script>
+const LS_KEY = "sp_custom_v1";
 let data = [];
 let activeChip = "全部";
 let query = "";
+let editing = false;
+let custom = loadLS();
+let editHost = null;   // 正在编辑的 host
+
+function loadLS() {
+  try {
+    const c = JSON.parse(localStorage.getItem(LS_KEY) || "null");
+    return { hidden: [], rename: {}, override_url: {}, ...(c || {}) };
+  } catch { return { hidden: [], rename: {}, override_url: {} }; }
+}
+function saveLS() { localStorage.setItem(LS_KEY, JSON.stringify(custom)); }
+
+function matchRule(it, rule) {
+  return rule.includes("://") ? it.url.startsWith(rule) : it.host === rule;
+}
+function effective(it) {
+  return {
+    ...it,
+    title: custom.rename[it.host] || it.title,
+    url: custom.override_url[it.host] || it.url,
+  };
+}
 
 async function load() {
   try {
@@ -115,7 +209,7 @@ async function load() {
 
 function renderChips() {
   const counts = {};
-  for (const it of data) counts[it.folder] = (counts[it.folder] || 0) + 1;
+  for (const it of data) if (!custom.hidden.some(h => matchRule(it, h))) counts[it.folder] = (counts[it.folder] || 0) + 1;
   const folders = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
   const wrap = document.getElementById("chips");
   wrap.innerHTML = "";
@@ -123,11 +217,12 @@ function renderChips() {
   for (const f of all) {
     const c = document.createElement("span");
     c.className = "chip" + (f === activeChip ? " active" : "");
-    const n = f === "全部" ? data.length : counts[f];
+    const n = f === "全部" ? data.length - custom.hidden.length : counts[f];
     c.innerHTML = `${f}<span class="n">${n}</span>`;
     c.onclick = () => { activeChip = f; renderChips(); render(); };
     wrap.appendChild(c);
   }
+  if (!folders.includes(activeChip)) activeChip = "全部";
 }
 
 function hashHue(s) {
@@ -145,7 +240,10 @@ function cardHTML(it) {
     `loading="lazy" onerror="this.remove();this.parentElement.textContent='${letter.replace(/'/g, "")}'">` +
     `</div>`;
   const pin = it.pinned ? '<span class="pin">📌</span>' : "";
-  return `<a class="card" href="${it.url}" target="_blank" rel="noopener">${pin}${ico}` +
+  const ops = editing
+    ? `<span class="ops"><button class="hide" data-act="hide" title="隐藏">✕</button>` +
+      `<button data-act="edit" title="改标题/网址">✎</button></span>` : "";
+  return `<a class="card" href="${it.url}" target="_blank" rel="noopener" data-host="${it.host}">${pin}${ops}${ico}` +
     `<div class="meta"><div class="t">${escapeHtml(it.title || it.host)}</div>` +
     `<div class="h">${escapeHtml(it.host)}</div></div></a>`;
 }
@@ -157,25 +255,97 @@ function escapeHtml(s) {
 function render() {
   const q = query.trim().toLowerCase();
   const items = data.filter(it => {
+    if (custom.hidden.some(h => matchRule(it, h))) return false;
     if (activeChip !== "全部" && it.folder !== activeChip) return false;
     if (!q) return true;
-    return (it.title + " " + it.host + " " + it.url).toLowerCase().includes(q);
+    const e = effective(it);
+    return (e.title + " " + it.host + " " + e.url).toLowerCase().includes(q);
   });
   const groups = new Map();
   for (const it of items) {
     if (!groups.has(it.folder)) groups.set(it.folder, []);
-    groups.get(it.folder).push(it);
+    groups.get(it.folder).push(effective(it));
   }
   const main = document.getElementById("main");
   if (!items.length) {
     main.innerHTML = '<div class="empty">😶 没有匹配的网站</div>';
-    return;
+  } else {
+    main.innerHTML = [...groups.entries()]
+      .map(([folder, list]) =>
+        `<section><h2>${escapeHtml(folder)}</h2><div class="grid">${list.map(cardHTML).join("")}</div></section>`)
+      .join("");
   }
-  main.innerHTML = [...groups.entries()]
-    .map(([folder, list]) =>
-      `<section><h2>${escapeHtml(folder)}</h2><div class="grid">${list.map(cardHTML).join("")}</div></section>`)
-    .join("");
+  renderHiddenBar();
 }
+
+function renderHiddenBar() {
+  const bar = document.getElementById("hiddenbar");
+  const list = document.getElementById("hiddenlist");
+  bar.classList.toggle("show", editing && custom.hidden.length > 0);
+  list.innerHTML = "";
+  for (const h of custom.hidden) {
+    const known = data.find(it => matchRule(it, h));
+    const name = known ? known.title : h;
+    const el = document.createElement("span");
+    el.className = "item";
+    el.textContent = `↩ ${name}`;
+    el.onclick = () => {
+      custom.hidden = custom.hidden.filter(x => x !== h);
+      saveLS(); renderChips(); render();
+    };
+    list.appendChild(el);
+  }
+}
+
+/* ---------- 编辑模式 ---------- */
+function setEditing(on) {
+  editing = on;
+  document.body.classList.toggle("editing", on);
+  document.getElementById("editBtn").style.display = on ? "none" : "";
+  document.getElementById("exportBtn").style.display = on ? "" : "none";
+  document.getElementById("doneBtn").style.display = on ? "" : "none";
+  render();
+}
+
+document.getElementById("editBtn").onclick = () => setEditing(true);
+document.getElementById("doneBtn").onclick = () => setEditing(false);
+document.getElementById("exportBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(custom, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "custom.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+/* 事件委托: 隐藏 / 编辑 */
+main.addEventListener("click", e => {
+  const btn = e.target.closest("button[data-act]");
+  if (!btn) return;
+  e.preventDefault();
+  const host = btn.closest(".card").dataset.host;
+  if (btn.dataset.act === "hide") {
+    custom.hidden.push(host);
+    saveLS(); renderChips(); render();
+  } else if (btn.dataset.act === "edit") {
+    editHost = host;
+    const it = data.find(x => x.host === host);
+    document.getElementById("e-title").value = (it && custom.rename[host]) || (it && it.title) || "";
+    document.getElementById("e-url").value = (it && (custom.override_url[host] || it.url)) || "";
+    document.getElementById("editdlg").showModal();
+  }
+});
+
+document.getElementById("e-save").onclick = () => {
+  const t = document.getElementById("e-title").value.trim();
+  const u = document.getElementById("e-url").value.trim();
+  if (t) custom.rename[editHost] = t; else delete custom.rename[editHost];
+  if (u) custom.override_url[editHost] = u; else delete custom.override_url[editHost];
+  saveLS();
+  document.getElementById("editdlg").close();
+  render();
+};
+document.getElementById("e-cancel").onclick = () => document.getElementById("editdlg").close();
 
 document.getElementById("search").addEventListener("input", e => { query = e.target.value; render(); });
 document.addEventListener("keydown", e => {

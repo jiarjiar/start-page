@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:09:17",
+ "updated": "2026-08-26T13:13:51",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -128,13 +128,6 @@
    "pinned": false
   },
   {
-   "url": "https://space.bilibili.com/5399233/favlist?fid=66462133&ftype=create",
-   "title": "omnivers的个人空间-omnivers个人主页-哔哩哔哩视频",
-   "host": "space.bilibili.com",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
    "url": "https://translate.google.com/",
    "title": "Google Translate",
    "host": "translate.google.com",
@@ -240,20 +233,6 @@
    "pinned": false
   },
   {
-   "url": "https://sc.panda985.com/",
-   "title": "学术搜索(panda985.com)",
-   "host": "sc.panda985.com",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
-   "url": "https://www.yfsp.tv/",
-   "title": "爱壹帆国际版-海量高清视频免费在线观看",
-   "host": "yfsp.tv",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
    "url": "https://ece.umd.edu/clark/faculty/1203/Cheng-Gong",
    "title": "Gong, Cheng | Department of Electrical and Computer Engineering",
    "host": "ece.umd.edu",
@@ -265,13 +244,6 @@
    "title": "Nature Index",
    "host": "nature.com",
    "folder": "work",
-   "pinned": false
-  },
-  {
-   "url": "https://www.youtube.com/",
-   "title": "(3) YouTube",
-   "host": "youtube.com",
-   "folder": "视频",
    "pinned": false
   },
   {

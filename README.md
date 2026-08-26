@@ -55,6 +55,35 @@
 
 置顶项显示 📌 并排在最前（顺序 = pins.json 里写的顺序）。
 
+## 网页编辑模式 (隐藏 / 改链接)
+
+点页面右上角 **✏️ 编辑**：
+
+- 卡片右上出现 **✕ 隐藏** 和 **✎ 改标题/网址** 小按钮
+- 隐藏的网站显示在页底，点一下可恢复
+- 编辑结果存在本机浏览器 (localStorage)，换设备/清缓存会丢失
+- **📦 导出规则** 按钮可下载 `custom.json`，把它放进项目目录后运行 `./update.sh`，规则就会永久生效（写进 data.json，全设备可见）
+
+`custom.json` 格式（也可手写）：
+
+```json
+{
+  "hidden": ["space.bilibili.com"],
+  "rename": {"youtube.com": "YouTube"},
+  "override_url": {"some.host": "https://新网址"}
+}
+```
+
+## 手动补充站点 (EXTRA_SITES)
+
+`fetch_bookmarks.py` 顶部的 `EXTRA_SITES` 可以强制加入任何站点（即使访问次数不够进 TOP 50）：
+
+```python
+EXTRA_SITES = [
+    {"url": "https://platform.kimi.ai/console/account", "title": "Kimi API 平台", "folder": "AI"},
+]
+```
+
 ## 隐私说明
 
 - `data.json` 随仓库公开，**只含 URL/标题/分类，不含访问次数**
