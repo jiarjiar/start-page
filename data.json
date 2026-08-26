@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T14:07:22",
+ "updated": "2026-08-26T14:08:31",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -41,6 +41,13 @@
    "title": "19×19 围棋AI引擎",
    "host": "19x19.com",
    "folder": "围棋",
+   "pinned": false
+  },
+  {
+   "url": "https://jiarjiar.github.io/umd-hours/",
+   "title": "UMD 开放时间 · UMD Hours",
+   "host": "jiarjiar.github.io",
+   "folder": "UMD",
    "pinned": false
   },
   {
@@ -202,13 +209,6 @@
    "title": "GONG LAB - Home",
    "host": "cgong.weebly.com",
    "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://shib.idm.umd.edu/shibboleth-idp/profile/Authn/Duo/2FA/authorize?conversation=e1s2",
-   "title": "shib.idm.umd.edu",
-   "host": "shib.idm.umd.edu",
-   "folder": "UMD",
    "pinned": false
   },
   {

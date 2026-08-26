@@ -117,6 +117,7 @@ EXTRA_SITES = [
     {"url": "https://www.kimi.com/", "title": "Kimi 网页版", "folder": "AI"},
     {"url": "https://www.101weiqi.com/", "title": "101围棋网", "folder": "围棋"},
     {"url": "https://19x19.com/engine/index", "title": "19×19 围棋AI引擎", "folder": "围棋"},
+    {"url": "https://jiarjiar.github.io/umd-hours/", "title": "UMD 开放时间 · UMD Hours", "folder": "UMD"},
 ]
 
 # 代表 URL 模板规则: host 后缀 → 目标 URL (命中即用, 优先级高于清理逻辑)
