@@ -10,6 +10,7 @@
   --text: #1f2328; --muted: #656d76; --accent: #0969da;
   --card-border: #d0d7de; --chip-bg: #eef1f4; --shadow: 0 1px 2px rgba(0,0,0,.06);
   --danger: #d1242f; --op: rgba(255,255,255,.92); --op-border: #d0d7de;
+  --col-bg: rgba(255,255,255,.55);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -17,6 +18,7 @@
     --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
     --card-border: #21262d; --chip-bg: #21262d; --shadow: 0 1px 3px rgba(0,0,0,.4);
     --danger: #f85149; --op: rgba(22,27,34,.92); --op-border: #30363d;
+    --col-bg: rgba(22,27,34,.5);
   }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,25 +54,30 @@ h1 .dot { color: var(--accent); }
   background-repeat: no-repeat; background-position: 14px center;
 }
 #search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
-#chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
-.chip {
-  padding: 5px 14px; border-radius: 999px; font-size: 13px; cursor: pointer;
-  border: 1px solid var(--border); background: var(--chip-bg); color: var(--muted);
-  user-select: none; transition: all .15s;
+.columns {
+  max-width: 1400px; margin: 20px auto 40px; padding: 0 20px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start;
 }
-.chip.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
-.chip:hover:not(.active) { color: var(--text); border-color: var(--accent); }
-.chip .n { opacity: .65; font-size: 11px; margin-left: 3px; }
-main { max-width: 1080px; margin: 0 auto; padding: 20px 20px 60px; }
-section { margin-bottom: 28px; }
-h2 {
-  font-size: 14px; color: var(--muted); font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+@media (max-width: 980px) { .columns { grid-template-columns: 1fr; } }
+.col {
+  background: var(--col-bg); border: 1px solid var(--border); border-radius: 16px;
+  padding: 16px; min-width: 0;
 }
-h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.col-head {
+  display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 12px;
+}
+.col-head .cnt { font-size: 12px; color: var(--muted); font-weight: 500; margin-left: auto; white-space: nowrap; }
+.cgroup { margin-bottom: 16px; }
+.cgroup:last-child { margin-bottom: 0; }
+h3 {
+  font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase;
+  letter-spacing: .8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+h3::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
 .card {
-  display: flex; align-items: center; gap: 14px; padding: 13px 15px;
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
   background: var(--panel); border: 1px solid var(--card-border); border-radius: 12px;
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
   transition: transform .12s, border-color .12s, box-shadow .12s;
@@ -78,19 +85,16 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 }
 .card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
 .ico {
-  width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 20px; color: #fff;
+  font-weight: 700; font-size: 17px; color: #fff;
 }
-.ico img { width: 100%; height: 100%; border-radius: 12px; }
+.ico img { width: 100%; height: 100%; border-radius: 10px; }
 .meta { min-width: 0; }
-.t { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.h { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-.pin { position: absolute; top: 8px; right: 10px; font-size: 12px; }
-.card .ops {
-  position: absolute; top: -8px; right: -6px; display: none; gap: 4px;
-}
-body.editing .card:hover { border-color: var(--accent); }
+.t { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.pin { position: absolute; top: 7px; right: 9px; font-size: 11px; }
+.card .ops { position: absolute; top: -8px; right: -6px; display: none; gap: 4px; }
 body.editing .card:hover .ops { display: flex; }
 .card .ops button {
   width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--op-border);
@@ -129,10 +133,6 @@ dialog input:focus { border-color: var(--accent); }
 .dlg-actions .spacer { flex: 1; }
 dialog .hint { font-size: 11px; color: var(--muted); margin-top: 10px; }
 footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
-@media (max-width: 480px) {
-  .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-  h1 { font-size: 17px; }
-}
 </style>
 </head>
 <body>
@@ -144,9 +144,8 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
     <button class="btn" id="doneBtn" style="display:none">✅ 完成</button>
   </div>
   <input id="search" type="text" placeholder="搜索网站 / 域名…  (按 / 聚焦)" autocomplete="off">
-  <div id="chips"></div>
 </header>
-<main id="main"></main>
+<main class="columns" id="main"></main>
 <div id="hiddenbar">
   <b>😶 已隐藏的网站 (点一下恢复):</b>
   <div id="hiddenlist" style="margin-top:6px"></div>
@@ -178,12 +177,23 @@ const CUSTOM_ICONS = {
   "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
   "19x19.com": "https://19x19.com/favicon.ico",
 };
+
+/* 三大栏目: folder → 栏目索引 */
+const COLUMNS = [
+  { key: 0, title: "🤖 AI 助手", folders: ["AI"] },
+  { key: 1, title: "🧪 工作 · 研究", folders: ["常用", "工具", "文献", "UMD", "work", "KE", "lab", "job", "appl"] },
+  { key: 2, title: "🎮 生活 · 娱乐", folders: ["视频", "围棋", "社交", "归档", "其他", "mobile", "3dp", "habi"] },
+];
+function colOf(folder) {
+  for (const c of COLUMNS) if (c.folders.includes(folder)) return c.key;
+  return 2; // 未知分类 → 生活栏
+}
+
 let data = [];
-let activeChip = "全部";
 let query = "";
 let editing = false;
 let custom = loadLS();
-let editHost = null;   // 正在编辑的 host
+let editHost = null;
 
 function loadLS() {
   try {
@@ -192,16 +202,11 @@ function loadLS() {
   } catch { return { hidden: [], rename: {}, override_url: {} }; }
 }
 function saveLS() { localStorage.setItem(LS_KEY, JSON.stringify(custom)); }
-
 function matchRule(it, rule) {
   return rule.includes("://") ? it.url.startsWith(rule) : it.host === rule;
 }
 function effective(it) {
-  return {
-    ...it,
-    title: custom.rename[it.host] || it.title,
-    url: custom.override_url[it.host] || it.url,
-  };
+  return { ...it, title: custom.rename[it.host] || it.title, url: custom.override_url[it.host] || it.url };
 }
 
 async function load() {
@@ -213,26 +218,7 @@ async function load() {
       '<div class="empty">⚠️ 加载 data.json 失败 — 请先运行 <code>python3 fetch_bookmarks.py</code></div>';
     return;
   }
-  renderChips();
   render();
-}
-
-function renderChips() {
-  const counts = {};
-  for (const it of data) if (!custom.hidden.some(h => matchRule(it, h))) counts[it.folder] = (counts[it.folder] || 0) + 1;
-  const folders = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
-  const wrap = document.getElementById("chips");
-  wrap.innerHTML = "";
-  const all = ["全部", ...folders];
-  for (const f of all) {
-    const c = document.createElement("span");
-    c.className = "chip" + (f === activeChip ? " active" : "");
-    const n = f === "全部" ? data.length - custom.hidden.length : counts[f];
-    c.innerHTML = `${f}<span class="n">${n}</span>`;
-    c.onclick = () => { activeChip = f; renderChips(); render(); };
-    wrap.appendChild(c);
-  }
-  if (!folders.includes(activeChip)) activeChip = "全部";
 }
 
 function hashHue(s) {
@@ -266,25 +252,29 @@ function render() {
   const q = query.trim().toLowerCase();
   const items = data.filter(it => {
     if (custom.hidden.some(h => matchRule(it, h))) return false;
-    if (activeChip !== "全部" && it.folder !== activeChip) return false;
     if (!q) return true;
     const e = effective(it);
     return (e.title + " " + it.host + " " + e.url).toLowerCase().includes(q);
   });
-  const groups = new Map();
-  for (const it of items) {
-    if (!groups.has(it.folder)) groups.set(it.folder, []);
-    groups.get(it.folder).push(effective(it));
-  }
   const main = document.getElementById("main");
   if (!items.length) {
     main.innerHTML = '<div class="empty">😶 没有匹配的网站</div>';
-  } else {
-    main.innerHTML = [...groups.entries()]
-      .map(([folder, list]) =>
-        `<section><h2>${escapeHtml(folder)}</h2><div class="grid">${list.map(cardHTML).join("")}</div></section>`)
-      .join("");
+    return;
   }
+  main.innerHTML = COLUMNS.map(col => {
+    const colItems = items.filter(it => colOf(it.folder) === col.key);
+    if (!colItems.length) return "";
+    const groups = new Map();
+    for (const it of colItems) {
+      if (!groups.has(it.folder)) groups.set(it.folder, []);
+      groups.get(it.folder).push(it);
+    }
+    const body = [...groups.entries()]
+      .map(([folder, list]) =>
+        `<div class="cgroup"><h3>${escapeHtml(folder)}</h3><div class="grid">${list.map(cardHTML).join("")}</div></div>`)
+      .join("");
+    return `<section class="col"><div class="col-head">${col.title}<span class="cnt">${colItems.length} 个</span></div>${body}</section>`;
+  }).join("");
   renderHiddenBar();
 }
 
@@ -301,7 +291,7 @@ function renderHiddenBar() {
     el.textContent = `↩ ${name}`;
     el.onclick = () => {
       custom.hidden = custom.hidden.filter(x => x !== h);
-      saveLS(); renderChips(); render();
+      saveLS(); render();
     };
     list.appendChild(el);
   }
@@ -316,7 +306,6 @@ function setEditing(on) {
   document.getElementById("doneBtn").style.display = on ? "" : "none";
   render();
 }
-
 document.getElementById("editBtn").onclick = () => setEditing(true);
 document.getElementById("doneBtn").onclick = () => setEditing(false);
 document.getElementById("exportBtn").onclick = () => {
@@ -328,15 +317,14 @@ document.getElementById("exportBtn").onclick = () => {
   URL.revokeObjectURL(a.href);
 };
 
-/* 事件委托: 隐藏 / 编辑 */
-main.addEventListener("click", e => {
+document.getElementById("main").addEventListener("click", e => {
   const btn = e.target.closest("button[data-act]");
   if (!btn) return;
   e.preventDefault();
   const host = btn.closest(".card").dataset.host;
   if (btn.dataset.act === "hide") {
     custom.hidden.push(host);
-    saveLS(); renderChips(); render();
+    saveLS(); render();
   } else if (btn.dataset.act === "edit") {
     editHost = host;
     const it = data.find(x => x.host === host);
