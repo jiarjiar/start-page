@@ -152,6 +152,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
 .wslot { min-width: 46px; text-align: center; font-size: 10px; color: var(--muted); }
 .wslot em { display: block; font-style: normal; font-size: 16px; }
 .wslot b { display: block; font-size: 13px; color: var(--text); font-weight: 600; }
+.wsun { font-size: 10px; color: var(--muted); margin-top: 6px; }
 .wdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 8px; }
 .wday { text-align: center; font-size: 10px; color: var(--muted); }
 .wday em { display: block; font-style: normal; font-size: 15px; }
@@ -351,7 +352,7 @@ function updateClock() {
 
 async function loadWeather() {
   try {
-    const P = "&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=temperature_2m,weather_code";
+    const P = "&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset&hourly=temperature_2m,weather_code";
     const us = `https://api.open-meteo.com/v1/forecast?latitude=38.9807,42.3601,40.7128&longitude=-76.9368,-71.0589,-74.0060&timezone=America%2FNew_York${P}`;
     const hk = `https://api.open-meteo.com/v1/forecast?latitude=22.3193&longitude=114.1694&timezone=Asia%2FHong_Kong${P}`;
     const [r1, r2] = await Promise.all([fetch(us), fetch(hk)]);
@@ -387,6 +388,8 @@ async function loadWeather() {
       return `<span class="wcity">${name}<em>${wmoEmoji(c.weather_code, c.is_day)}</em><b>${Math.round(c.temperature_2m)}°</b> <span style="font-size:9px">${hi}°/${lo}°</span></span>`;
     };
 
+    /* 日出日落 (同 timezone 的 ISO 时间, 取 HH:MM) */
+    const sun = (x) => x && x.length >= 16 ? x.slice(11, 16) : "--:--";
     weatherHTML = `<div class="wbox">
       <div class="wclock" id="wclock">--:--</div>
       <div class="wdate" id="wdate">—</div>
@@ -394,6 +397,7 @@ async function loadWeather() {
         <span class="wcur">${wmoEmoji(cp.current.weather_code, cp.current.is_day)} ${Math.round(cp.current.temperature_2m)}°</span>
         <div class="w12h">${slots.join("")}</div>
       </div>
+      <div class="wsun">🌅 日出 ${sun(cp.daily.sunrise[0])} · 🌇 日落 ${sun(cp.daily.sunset[0])}</div>
       <div class="wdays">${dayRow(cp.daily, 0)}${dayRow(cp.daily, 1)}${dayRow(cp.daily, 2)}${dayRow(cp.daily, 3)}${dayRow(cp.daily, 4)}${dayRow(cp.daily, 5)}${dayRow(cp.daily, 6)}</div>
       <div class="wcities">${cityRow(bos, "Boston")}${cityRow(nyc, "NYC")}${cityRow(hkD, "香港")}</div>
     </div>`;
