@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:48:12",
+ "updated": "2026-08-26T14:07:22",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -19,6 +19,13 @@
    "url": "https://platform.kimi.ai/console/account",
    "title": "Kimi API 平台",
    "host": "platform.kimi.ai",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.kimi.com/",
+   "title": "Kimi 网页版",
+   "host": "kimi.com",
    "folder": "AI",
    "pinned": false
   },
@@ -240,6 +247,13 @@
    "pinned": false
   },
   {
+   "url": "https://github.com/",
+   "title": "GitHub",
+   "host": "github.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
    "url": "https://ollama.com/search",
    "title": "d · Ollama",
    "host": "ollama.com",
@@ -251,13 +265,6 @@
    "title": "maps.google.com",
    "host": "maps.google.com",
    "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://github.com/",
-   "title": "GitHub",
-   "host": "github.com",
-   "folder": "work",
    "pinned": false
   },
   {
@@ -275,17 +282,17 @@
    "pinned": false
   },
   {
-   "url": "https://live.bilibili.com/",
-   "title": "哔哩哔哩直播，二次元弹幕直播平台",
-   "host": "live.bilibili.com",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
    "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
    "title": "onlinelibrary.wiley.com",
    "host": "onlinelibrary.wiley.com",
    "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://live.bilibili.com/",
+   "title": "哔哩哔哩直播，二次元弹幕直播平台",
+   "host": "live.bilibili.com",
+   "folder": "视频",
    "pinned": false
   },
   {
