@@ -402,11 +402,12 @@ async function loadWeather() {
     const hkD = await r2.json();
 
     // 未来 12 小时(每 2h 一档): 从当前小时起
+    // ⚠️ hourly.time 是东岸本地时间, 必须用 getHours() 而非 toISOString()(UTC) 对齐
     const hourly = cp.hourly;
-    const nowIso = new Date().toISOString().slice(0, 16);
+    const nowH = new Date().getHours();
     let start = 0;
     for (let i = 0; i < hourly.time.length; i++) {
-      if (hourly.time[i] >= nowIso.slice(0, 13)) { start = i; break; }
+      if (parseInt(hourly.time[i].slice(11, 13), 10) >= nowH) { start = i; break; }
     }
     const slots = [];
     for (let i = 0; i < 6; i++) {
