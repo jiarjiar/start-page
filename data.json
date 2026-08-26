@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T14:13:32",
+ "updated": "2026-08-26T19:52:12",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -58,6 +58,27 @@
    "pinned": false
   },
   {
+   "url": "https://www.shidianguji.com/zh/",
+   "title": "识典古籍",
+   "host": "shidianguji.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://myleapdrivingacademy.com/driversedu/",
+   "title": "My Leap 驾校课程表",
+   "host": "myleapdrivingacademy.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://jiarjiar.wixsite.com/main",
+   "title": "Omnivers & Semicro 个人站",
+   "host": "jiarjiar.wixsite.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
    "url": "https://www.bilibili.com/",
    "title": "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
    "host": "bilibili.com",
@@ -79,13 +100,6 @@
    "pinned": false
   },
   {
-   "url": "https://www.nature.com/nature-index/",
-   "title": "Nature Index",
-   "host": "nature.com",
-   "folder": "work",
-   "pinned": false
-  },
-  {
    "url": "https://www.linkedin.com/mynetwork/grow/",
    "title": "Grow | LinkedIn",
    "host": "linkedin.com",
@@ -93,10 +107,24 @@
    "pinned": false
   },
   {
+   "url": "https://www.nature.com/nature-index/",
+   "title": "Nature Index",
+   "host": "nature.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
    "url": "https://www.amazon.com/ref=nav_logo",
    "title": "Amazon.com. Spend less. Smile more.",
    "host": "amazon.com",
    "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://earth.google.com/web/?authuser=4",
+   "title": "earth.google.com",
+   "host": "earth.google.com",
+   "folder": "工具",
    "pinned": false
   },
   {
@@ -111,13 +139,6 @@
    "title": "asaki大人-哔哩哔哩_bilibili",
    "host": "search.bilibili.com",
    "folder": "视频",
-   "pinned": false
-  },
-  {
-   "url": "https://earth.google.com/web/?authuser=4",
-   "title": "earth.google.com",
-   "host": "earth.google.com",
-   "folder": "工具",
    "pinned": false
   },
   {
@@ -261,13 +282,6 @@
    "pinned": false
   },
   {
-   "url": "https://ollama.com/search",
-   "title": "d · Ollama",
-   "host": "ollama.com",
-   "folder": "AI",
-   "pinned": false
-  },
-  {
    "url": "https://maps.google.com/",
    "title": "maps.google.com",
    "host": "maps.google.com",
@@ -289,10 +303,10 @@
    "pinned": false
   },
   {
-   "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
-   "title": "onlinelibrary.wiley.com",
-   "host": "onlinelibrary.wiley.com",
-   "folder": "文献",
+   "url": "https://ollama.com/search",
+   "title": "d · Ollama",
+   "host": "ollama.com",
+   "folder": "AI",
    "pinned": false
   },
   {
@@ -300,6 +314,13 @@
    "title": "哔哩哔哩直播，二次元弹幕直播平台",
    "host": "live.bilibili.com",
    "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
+   "title": "onlinelibrary.wiley.com",
+   "host": "onlinelibrary.wiley.com",
+   "folder": "文献",
    "pinned": false
   },
   {

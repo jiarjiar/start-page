@@ -119,6 +119,9 @@ EXTRA_SITES = [
     {"url": "https://www.101weiqi.com/", "title": "101围棋网", "folder": "围棋"},
     {"url": "https://19x19.com/engine/index", "title": "19×19 围棋AI引擎", "folder": "围棋"},
     {"url": "https://jiarjiar.github.io/umd-hours/", "title": "UMD 开放时间 · UMD Hours", "folder": "UMD"},
+    {"url": "https://www.shidianguji.com/zh/", "title": "识典古籍", "folder": "其他"},
+    {"url": "https://myleapdrivingacademy.com/driversedu/", "title": "My Leap 驾校课程表", "folder": "其他"},
+    {"url": "https://jiarjiar.wixsite.com/main", "title": "Omnivers & Semicro 个人站", "folder": "其他"},
 ]
 
 # 代表 URL 模板规则: host 后缀 → 目标 URL (命中即用, 优先级高于清理逻辑)
