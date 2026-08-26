@@ -107,11 +107,15 @@ SPECIAL_FOLDER = {
     "app.box.com": "工具",
     "drive.google.com": "工具",
     "linkedin.com": "社交",
+    "101weiqi.com": "围棋",
+    "19x19.com": "围棋",
 }
 
 # 手动补充的站点 (即使不在 TOP 50 也强制加入; 排序在置顶之后、普通之前)
 EXTRA_SITES = [
     {"url": "https://platform.kimi.ai/console/account", "title": "Kimi API 平台", "folder": "AI"},
+    {"url": "https://www.101weiqi.com/", "title": "101围棋网", "folder": "围棋"},
+    {"url": "https://19x19.com/engine/index", "title": "19×19 围棋AI引擎", "folder": "围棋"},
 ]
 
 # 代表 URL 模板规则: host 后缀 → 目标 URL (命中即用, 优先级高于清理逻辑)
@@ -326,8 +330,9 @@ def build_items(conn, limit, pins):
     ):
         bookmark_folder.setdefault(url, folder or "其他")
 
-    # 聚合: norm_host → 候选
+    # 聚合: norm_host → 候选 (同时统计域名合计访问量)
     agg: dict[str, list[tuple[str, int, str]]] = defaultdict(list)
+    totals: dict[str, int] = defaultdict(int)
     for url, (v, title) in hist.items():
         try:
             parts = urlsplit(url)
@@ -340,6 +345,7 @@ def build_items(conn, limit, pins):
         if is_noise(url, host):
             continue
         agg[host].append((url, v, title))
+        totals[host] += v
 
     items = []
     for host, cands in agg.items():
@@ -378,9 +384,9 @@ def build_items(conn, limit, pins):
             }
         )
 
-    # 排序: 置顶优先(保持 pins.json 顺序) → 手动补充 → 其余按访问量降序
+    # 排序: 置顶优先(保持 pins.json 顺序) → 手动补充 → 其余按域名合计访问量降序
     def sort_key(it):
-        v = max((x[1] for x in agg.get(it["host"], [])), default=0)
+        v = totals.get(it["host"], 0)
         if it.get("_extra"):
             return (0.5, 0, 0)
         if it["pinned"]:
@@ -411,7 +417,7 @@ def build_items(conn, limit, pins):
             }
         )
     items.sort(key=sort_key)  # 含 extras 重排 (排在置顶之后、普通之前)
-    return items, agg
+    return items, agg, totals
 
 
 def main():
@@ -432,7 +438,7 @@ def main():
 
     conn, tmpdir = read_db(db)
     try:
-        items, agg = build_items(conn, args.limit, pins)
+        items, agg, totals = build_items(conn, args.limit, pins)
     finally:
         conn.close()
 
@@ -444,7 +450,7 @@ def main():
     print(f"{'访问':>6}  {'分类':<8}  {'代表URL':<45}  host")
     print("-" * 90)
     for it in items:
-        v = max((x[1] for x in agg.get(it["host"], [])), default=0)
+        v = totals.get(it["host"], 0)
         flag = "📌" if it["pinned"] else "  "
         print(f"{flag}{v:>5}  {it['folder']:<8}  {it['url'][:44]:<45}  {it['host']}")
 

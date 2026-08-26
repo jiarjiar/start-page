@@ -168,6 +168,16 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
 
 <script>
 const LS_KEY = "sp_custom_v1";
+/* 定制图标: 部分站点 s2 服务返回通用 logo, 这里用官方图标替换 */
+const CUSTOM_ICONS = {
+  "calendar.google.com": "https://calendar.google.com/favicon.ico",
+  "maps.google.com": "https://maps.google.com/favicon.ico",
+  "mail.google.com": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico",
+  "drive.google.com": "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png",
+  "translate.google.com": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
+  "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
+  "19x19.com": "https://19x19.com/favicon.ico",
+};
 let data = [];
 let activeChip = "全部";
 let query = "";
@@ -236,7 +246,7 @@ function cardHTML(it) {
   const letter = (it.title || it.host || "?")[0].toUpperCase();
   const ico =
     `<div class="ico" style="background:hsl(${hue},55%,45%)">` +
-    `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(it.host)}&sz=64" ` +
+    `<img src="${CUSTOM_ICONS[it.host] || ("https://www.google.com/s2/favicons?domain=" + encodeURIComponent(it.host) + "&sz=64")}" ` +
     `loading="lazy" onerror="this.remove();this.parentElement.textContent='${letter.replace(/'/g, "")}'">` +
     `</div>`;
   const pin = it.pinned ? '<span class="pin">📌</span>' : "";

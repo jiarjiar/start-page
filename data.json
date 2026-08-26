@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:13:51",
+ "updated": "2026-08-26T13:28:41",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -23,17 +23,17 @@
    "pinned": false
   },
   {
-   "url": "https://calendar.google.com/calendar/u/4/r/week",
-   "title": "Google Calendar",
-   "host": "calendar.google.com",
-   "folder": "常用",
+   "url": "https://www.101weiqi.com/",
+   "title": "101围棋网",
+   "host": "101weiqi.com",
+   "folder": "围棋",
    "pinned": false
   },
   {
-   "url": "https://remotedesktop.google.com/u/4/access/",
-   "title": "Chrome Remote Desktop",
-   "host": "remotedesktop.google.com",
-   "folder": "工具",
+   "url": "https://19x19.com/engine/index",
+   "title": "19×19 围棋AI引擎",
+   "host": "19x19.com",
+   "folder": "围棋",
    "pinned": false
   },
   {
@@ -44,55 +44,6 @@
    "pinned": false
   },
   {
-   "url": "https://outlook.office.com/mail/drafts",
-   "title": "Outlook",
-   "host": "outlook.office.com",
-   "folder": "常用",
-   "pinned": false
-  },
-  {
-   "url": "https://cgong.weebly.com/",
-   "title": "GONG LAB - Home",
-   "host": "cgong.weebly.com",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://maps.google.com/",
-   "title": "maps.google.com",
-   "host": "maps.google.com",
-   "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://chat.deepseek.com/",
-   "title": "DeepSeek - Into the Unknown",
-   "host": "chat.deepseek.com",
-   "folder": "AI",
-   "pinned": false
-  },
-  {
-   "url": "https://onlinelibrary.wiley.com/",
-   "title": "Wiley Online Library",
-   "host": "advanced.onlinelibrary.wiley.com",
-   "folder": "文献",
-   "pinned": false
-  },
-  {
-   "url": "https://www.nanocenter.umd.edu/scheduler/ctrlpnl.php",
-   "title": "My Control Panel",
-   "host": "nanocenter.umd.edu",
-   "folder": "UMD",
-   "pinned": false
-  },
-  {
-   "url": "https://platform.deepseek.com/usage",
-   "title": "DeepSeek 开放平台",
-   "host": "platform.deepseek.com",
-   "folder": "AI",
-   "pinned": false
-  },
-  {
    "url": "https://www.google.com/",
    "title": "Google",
    "host": "google.com",
@@ -100,52 +51,10 @@
    "pinned": false
   },
   {
-   "url": "https://www.iyf.tv/",
-   "title": "爱壹帆-海量高清视频免费在线观看",
-   "host": "iyf.tv",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
-   "url": "https://outlook.cloud.microsoft/mail/",
-   "title": "Mail - Siwei Chen - Outlook",
-   "host": "outlook.cloud.microsoft",
+   "url": "https://calendar.google.com/calendar/u/4/r/week",
+   "title": "Google Calendar",
+   "host": "calendar.google.com",
    "folder": "常用",
-   "pinned": false
-  },
-  {
-   "url": "https://docs.google.com/presentation/d/147buyMA1hVygLUVTwwN_Bvnw1wXIGWCA/edit?slide=id.g3a34b53359e_0_0",
-   "title": "Copy of UMD_progressRPT_Oct.pptx - Google Slides",
-   "host": "docs.google.com",
-   "folder": "work",
-   "pinned": false
-  },
-  {
-   "url": "https://shib.idm.umd.edu/shibboleth-idp/profile/Authn/Duo/2FA/authorize?conversation=e1s2",
-   "title": "shib.idm.umd.edu",
-   "host": "shib.idm.umd.edu",
-   "folder": "UMD",
-   "pinned": false
-  },
-  {
-   "url": "https://translate.google.com/",
-   "title": "Google Translate",
-   "host": "translate.google.com",
-   "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://login.stevens.edu/app/UserHome?iss=https%3A%2F%2Flogin.stevens.edu&session_hint=AUTHENTICATED",
-   "title": "My Apps Dashboard | Stevens Institute of Technology",
-   "host": "login.stevens.edu",
-   "folder": "mobile",
-   "pinned": false
-  },
-  {
-   "url": "https://umd-dining.s.gy/umd-dining",
-   "title": "umd-dining.s.gy",
-   "host": "umd-dining.s.gy",
-   "folder": "UMD",
    "pinned": false
   },
   {
@@ -156,65 +65,9 @@
    "pinned": false
   },
   {
-   "url": "https://ollama.com/search",
-   "title": "d · Ollama",
-   "host": "ollama.com",
-   "folder": "AI",
-   "pinned": false
-  },
-  {
-   "url": "https://myaccount.acs.org/myaccount/AcctOverview",
-   "title": "myaccount.acs.org",
-   "host": "myaccount.acs.org",
-   "folder": "文献",
-   "pinned": false
-  },
-  {
-   "url": "https://jiarjiar.github.io/umd-hours/",
-   "title": "UMD 开放时间 · UMD Hours",
-   "host": "jiarjiar.github.io",
-   "folder": "UMD",
-   "pinned": false
-  },
-  {
-   "url": "https://drive.google.com/drive/u/4/my-drive",
-   "title": "My Drive - Google Drive",
-   "host": "drive.google.com",
-   "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://outlook.office365.com/owa/?path=%2Fmail&wa=wsignin1.0",
-   "title": "outlook.office365.com",
-   "host": "outlook.office365.com",
-   "folder": "常用",
-   "pinned": false
-  },
-  {
-   "url": "https://discord.com/channels/1510095900574220441/1517916106562605216",
-   "title": "(1) Discord | #attodry | phi's server",
-   "host": "discord.com",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://notegpt.io/cn/bilibili-summarizer",
-   "title": "BiliBili 视频总结工具 - 一键总结哔哩哔哩视频",
-   "host": "notegpt.io",
-   "folder": "视频",
-   "pinned": false
-  },
-  {
-   "url": "https://z.ai/manage-apikey/subscription",
-   "title": "Z.ai - Inspiring AGI to Benefit Humanity",
-   "host": "z.ai",
-   "folder": "AI",
-   "pinned": false
-  },
-  {
-   "url": "https://www.stevens.edu/profile/sstrauf",
-   "title": "Stefan Strauf | Stevens Institute of Technology",
-   "host": "stevens.edu",
+   "url": "https://www.nature.com/nature-index/",
+   "title": "Nature Index",
+   "host": "nature.com",
    "folder": "work",
    "pinned": false
   },
@@ -226,66 +79,94 @@
    "pinned": false
   },
   {
-   "url": "https://www.myworkday.com/umd/d/home.htmld",
-   "title": "Home - Workday",
-   "host": "myworkday.com",
-   "folder": "UMD",
+   "url": "https://www.amazon.com/ref=nav_logo",
+   "title": "Amazon.com. Spend less. Smile more.",
+   "host": "amazon.com",
+   "folder": "KE",
    "pinned": false
   },
   {
-   "url": "https://ece.umd.edu/clark/faculty/1203/Cheng-Gong",
-   "title": "Gong, Cheng | Department of Electrical and Computer Engineering",
-   "host": "ece.umd.edu",
-   "folder": "归档",
-   "pinned": false
-  },
-  {
-   "url": "https://www.nature.com/nature-index/",
-   "title": "Nature Index",
-   "host": "nature.com",
+   "url": "https://docs.google.com/presentation/d/147buyMA1hVygLUVTwwN_Bvnw1wXIGWCA/edit?slide=id.g3a34b53359e_0_0",
+   "title": "Copy of UMD_progressRPT_Oct.pptx - Google Slides",
+   "host": "docs.google.com",
    "folder": "work",
    "pinned": false
   },
   {
-   "url": "https://script.google.com/u/4/home/projects/1rd0BgXrHUcegtbP3r6gSAfnISn0lkbaKR3SpNe0fJ8__P25jV0cowBZP/edit",
-   "title": "calendar management - Project Editor - Apps Script",
-   "host": "script.google.com",
+   "url": "https://translate.google.com/",
+   "title": "Google Translate",
+   "host": "translate.google.com",
    "folder": "工具",
    "pinned": false
   },
   {
-   "url": "https://my.uscis.gov/account/applicant",
-   "title": "USCIS Account - Home Page",
-   "host": "my.uscis.gov",
+   "url": "https://search.bilibili.com/all?keyword=asaki%E5%A4%A7%E4%BA%BA&from_source=webtop_search&spm_id_from=333.1007&search_source=5",
+   "title": "asaki大人-哔哩哔哩_bilibili",
+   "host": "search.bilibili.com",
+   "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://earth.google.com/web/?authuser=4",
+   "title": "earth.google.com",
+   "host": "earth.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://zh.wikipedia.org/wiki/%E5%88%87%E8%90%A8%E7%9A%AE%E5%85%8B%E6%B9%BE",
+   "title": "切萨皮克湾 - 维基百科，自由的百科全书",
+   "host": "zh.wikipedia.org",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/University_of_Maryland,_College_Park",
+   "title": "University of Maryland, College Park - Wikipedia",
+   "host": "en.wikipedia.org",
    "folder": "其他",
    "pinned": false
   },
   {
-   "url": "https://my.stevens.edu/",
-   "title": "Excellence Doctoral Fellowship Program | myStevens",
-   "host": "my.stevens.edu",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://www.101weiqi.com/",
-   "title": "101围棋网",
-   "host": "101weiqi.com",
-   "folder": "归档",
-   "pinned": false
-  },
-  {
-   "url": "https://myleapdrivingacademy.com/driversedu/",
-   "title": "My Leap Driving Academy – Driving Academy",
-   "host": "myleapdrivingacademy.com",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://isss.stevens.edu/isss/launchpad",
-   "title": "isss.stevens.edu",
-   "host": "isss.stevens.edu",
+   "url": "https://outlook.office.com/mail/drafts",
+   "title": "Outlook",
+   "host": "outlook.office.com",
    "folder": "常用",
+   "pinned": false
+  },
+  {
+   "url": "https://drive.google.com/drive/u/4/my-drive",
+   "title": "My Drive - Google Drive",
+   "host": "drive.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://remotedesktop.google.com/u/4/access/",
+   "title": "Chrome Remote Desktop",
+   "host": "remotedesktop.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://login.stevens.edu/app/UserHome?iss=https%3A%2F%2Flogin.stevens.edu&session_hint=AUTHENTICATED",
+   "title": "login.stevens.edu",
+   "host": "login.stevens.edu",
+   "folder": "mobile",
+   "pinned": false
+  },
+  {
+   "url": "https://www.researchgate.net/settings/account",
+   "title": "Settings | ResearchGate",
+   "host": "researchgate.net",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://onlinelibrary.wiley.com/",
+   "title": "Wiley Online Library",
+   "host": "advanced.onlinelibrary.wiley.com",
+   "folder": "文献",
    "pinned": false
   },
   {
@@ -296,38 +177,185 @@
    "pinned": false
   },
   {
-   "url": "https://myaccount.uscis.gov/sign-in",
-   "title": "USCIS Online Account | Welcome to US Citizenship and Immigration Services",
-   "host": "myaccount.uscis.gov",
-   "folder": "其他",
-   "pinned": false
-  },
-  {
-   "url": "https://notebooklm.google.com/notebook/de8fa847-125e-4641-bced-8163c6b326d8",
-   "title": "NotebookLM",
-   "host": "notebooklm.google.com",
-   "folder": "工具",
-   "pinned": false
-  },
-  {
-   "url": "https://chat.z.ai/",
-   "title": "Z.ai - Advanced AI Chatbot & Agent powered by GLM-5.2",
-   "host": "chat.z.ai",
+   "url": "https://gemini.google.com/app/4da22cc342e6ec40",
+   "title": "Google Gemini",
+   "host": "gemini.google.com",
    "folder": "AI",
    "pinned": false
   },
   {
-   "url": "https://app.box.com/folder/340305088258",
-   "title": "UMD-on boarding | Powered by Box",
-   "host": "app.box.com",
+   "url": "https://map.baidu.com/",
+   "title": "百度地图",
+   "host": "map.baidu.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://chat.deepseek.com/",
+   "title": "DeepSeek - Into the Unknown",
+   "host": "chat.deepseek.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.nanocenter.umd.edu/scheduler/ctrlpnl.php",
+   "title": "nanocenter.umd.edu",
+   "host": "nanocenter.umd.edu",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://www.thorlabs.com/",
+   "title": "Thorlabs · Home",
+   "host": "thorlabs.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://sites.google.com/site/makshangroup/jie-shan?authuser=0",
+   "title": "Two-Dimensional Quantum Materials - Jie Shan",
+   "host": "sites.google.com",
+   "folder": "归档",
+   "pinned": false
+  },
+  {
+   "url": "https://cgong.weebly.com/",
+   "title": "GONG LAB - Home",
+   "host": "cgong.weebly.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://shib.idm.umd.edu/shibboleth-idp/profile/Authn/Duo/2FA/authorize?conversation=e1s2",
+   "title": "shib.idm.umd.edu",
+   "host": "shib.idm.umd.edu",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://baike.baidu.com/pic/%E4%BA%94%E9%87%8C%E7%89%8C%E6%A5%9A%E7%AE%80/9292950/1/0eb30f2442a7d9331565d56ea54bd11372f001d9?fr=lemma&fromModule=lemma_content-image",
+   "title": "五里牌楚简图片_百度百科",
+   "host": "baike.baidu.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://www.stevens.edu/profile/sstrauf",
+   "title": "Stefan Strauf | Stevens Institute of Technology",
+   "host": "stevens.edu",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://www.myworkday.com/umd/d/home.htmld",
+   "title": "myworkday.com",
+   "host": "myworkday.com",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://api-05cb7de8.duosecurity.com/frame/v4/auth/prompt?sid=frameless-7ccbf843-af44-4aeb-82ba-9f39bdf68dd3",
+   "title": "Duo Security",
+   "host": "api-05cb7de8.duosecurity.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://www.science.org/doi/10.1126/sciadv.aba8834",
+   "title": "Nematicity with a twist: Rotational symmetry breaking in a moiré superlattice | Science Advances",
+   "host": "science.org",
+   "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://my.uscis.gov/account/applicant",
+   "title": "USCIS Account - Home Page",
+   "host": "my.uscis.gov",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://scholar.google.co.uk/scholar?as_q=&num=10&btnG=Search+Scholar&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=%22Zaiyao+Fei%22&as_publication=&as_ylo=&as_yhi=&as_allsubj=all&hl=en",
+   "title": "author:\"Zaiyao Fei\" - Google Scholar",
+   "host": "scholar.google.co.uk",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://www.iyf.tv/",
+   "title": "爱壹帆-海量高清视频免费在线观看",
+   "host": "iyf.tv",
+   "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://ollama.com/search",
+   "title": "d · Ollama",
+   "host": "ollama.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://maps.google.com/",
+   "title": "maps.google.com",
+   "host": "maps.google.com",
    "folder": "工具",
    "pinned": false
   },
   {
-   "url": "https://qm.mit.edu/",
-   "title": "Quantum Measurement Group",
-   "host": "qm.mit.edu",
+   "url": "https://pubs.acs.org/doi/abs/10.1021/acsphotonics.4c00255",
+   "title": "Narrowband Quantum Light Emission from Oxygen-Related Color Centers in Hexagonal Boron Nitride | ACS Photonics",
+   "host": "pubs.acs.org",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://www.bestbuy.com/",
+   "title": "Best Buy | Official Online Store | Shop Now & Save",
+   "host": "bestbuy.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://live.bilibili.com/",
+   "title": "哔哩哔哩直播，二次元弹幕直播平台",
+   "host": "live.bilibili.com",
+   "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://github.com/",
+   "title": "GitHub",
+   "host": "github.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
+   "title": "onlinelibrary.wiley.com",
+   "host": "onlinelibrary.wiley.com",
    "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://outlook.cloud.microsoft/mail/",
+   "title": "Mail - Siwei Chen - Outlook",
+   "host": "outlook.cloud.microsoft",
+   "folder": "常用",
+   "pinned": false
+  },
+  {
+   "url": "https://platform.deepseek.com/usage",
+   "title": "DeepSeek 开放平台",
+   "host": "platform.deepseek.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://mymva.maryland.gov/TAP/IND/_/",
+   "title": "Online Services - myMVA",
+   "host": "mymva.maryland.gov",
+   "folder": "其他",
    "pinned": false
   }
  ]
