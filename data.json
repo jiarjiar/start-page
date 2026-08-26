@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T14:08:31",
+ "updated": "2026-08-26T14:13:32",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -26,6 +26,13 @@
    "url": "https://www.kimi.com/",
    "title": "Kimi 网页版",
    "host": "kimi.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://z.ai/manage-apikey/subscription",
+   "title": "Z.ai API 管理",
+   "host": "z.ai",
    "folder": "AI",
    "pinned": false
   },

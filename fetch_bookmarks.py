@@ -115,6 +115,7 @@ SPECIAL_FOLDER = {
 EXTRA_SITES = [
     {"url": "https://platform.kimi.ai/console/account", "title": "Kimi API 平台", "folder": "AI"},
     {"url": "https://www.kimi.com/", "title": "Kimi 网页版", "folder": "AI"},
+    {"url": "https://z.ai/manage-apikey/subscription", "title": "Z.ai API 管理", "folder": "AI"},
     {"url": "https://www.101weiqi.com/", "title": "101围棋网", "folder": "围棋"},
     {"url": "https://19x19.com/engine/index", "title": "19×19 围棋AI引擎", "folder": "围棋"},
     {"url": "https://jiarjiar.github.io/umd-hours/", "title": "UMD 开放时间 · UMD Hours", "folder": "UMD"},
