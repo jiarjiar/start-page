@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 我的常用导航</title>
+<style>
+:root {
+  --bg: #f6f8fa; --panel: #ffffff; --border: #d0d7de;
+  --text: #1f2328; --muted: #656d76; --accent: #0969da;
+  --card-border: #d0d7de; --chip-bg: #eef1f4; --shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --card-border: #21262d; --chip-bg: #21262d; --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh;
+  transition: background .3s, color .3s;
+}
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px 12px;
+  display: flex; flex-direction: column; gap: 12px; align-items: center;
+}
+h1 { font-size: 20px; font-weight: 700; letter-spacing: .3px; }
+h1 .dot { color: var(--accent); }
+#search {
+  width: min(560px, 100%); padding: 10px 16px 10px 40px;
+  font-size: 15px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--panel); color: var(--text); outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 14px center;
+}
+#search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+#chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
+.chip {
+  padding: 5px 14px; border-radius: 999px; font-size: 13px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--chip-bg); color: var(--muted);
+  user-select: none; transition: all .15s;
+}
+.chip.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+.chip:hover:not(.active) { color: var(--text); border-color: var(--accent); }
+.chip .n { opacity: .65; font-size: 11px; margin-left: 3px; }
+main { max-width: 1080px; margin: 0 auto; padding: 20px 20px 60px; }
+section { margin-bottom: 28px; }
+h2 {
+  font-size: 14px; color: var(--muted); font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.card {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  background: var(--panel); border: 1px solid var(--card-border); border-radius: 12px;
+  text-decoration: none; color: inherit; box-shadow: var(--shadow);
+  transition: transform .12s, border-color .12s, box-shadow .12s;
+  position: relative;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+.ico {
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; color: #fff;
+}
+.ico img { width: 100%; height: 100%; border-radius: 9px; }
+.meta { min-width: 0; }
+.t { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.h { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.pin {
+  position: absolute; top: 8px; right: 10px; font-size: 12px;
+}
+.empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 14px; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  h1 { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🚀 我的常用导航<span class="dot">.</span></h1>
+  <input id="search" type="text" placeholder="搜索网站 / 域名…  (按 / 聚焦)" autocomplete="off">
+  <div id="chips"></div>
+</header>
+<main id="main"></main>
+<footer>数据来自本地 Firefox · 自动生成 · 更新时运行 update.sh</footer>
+
+<script>
+let data = [];
+let activeChip = "全部";
+let query = "";
+
+async function load() {
+  try {
+    const r = await fetch("data.json?v=" + Date.now());
+    data = (await r.json()).items || [];
+  } catch (e) {
+    document.getElementById("main").innerHTML =
+      '<div class="empty">⚠️ 加载 data.json 失败 — 请先运行 <code>python3 fetch_bookmarks.py</code></div>';
+    return;
+  }
+  renderChips();
+  render();
+}
+
+function renderChips() {
+  const counts = {};
+  for (const it of data) counts[it.folder] = (counts[it.folder] || 0) + 1;
+  const folders = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  const wrap = document.getElementById("chips");
+  wrap.innerHTML = "";
+  const all = ["全部", ...folders];
+  for (const f of all) {
+    const c = document.createElement("span");
+    c.className = "chip" + (f === activeChip ? " active" : "");
+    const n = f === "全部" ? data.length : counts[f];
+    c.innerHTML = `${f}<span class="n">${n}</span>`;
+    c.onclick = () => { activeChip = f; renderChips(); render(); };
+    wrap.appendChild(c);
+  }
+}
+
+function hashHue(s) {
+  let h = 0;
+  for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  return h;
+}
+
+function cardHTML(it) {
+  const hue = hashHue(it.host);
+  const letter = (it.title || it.host || "?")[0].toUpperCase();
+  const ico =
+    `<div class="ico" style="background:hsl(${hue},55%,45%)">` +
+    `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(it.host)}&sz=64" ` +
+    `loading="lazy" onerror="this.remove();this.parentElement.textContent='${letter.replace(/'/g, "")}'">` +
+    `</div>`;
+  const pin = it.pinned ? '<span class="pin">📌</span>' : "";
+  return `<a class="card" href="${it.url}" target="_blank" rel="noopener">${pin}${ico}` +
+    `<div class="meta"><div class="t">${escapeHtml(it.title || it.host)}</div>` +
+    `<div class="h">${escapeHtml(it.host)}</div></div></a>`;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function render() {
+  const q = query.trim().toLowerCase();
+  const items = data.filter(it => {
+    if (activeChip !== "全部" && it.folder !== activeChip) return false;
+    if (!q) return true;
+    return (it.title + " " + it.host + " " + it.url).toLowerCase().includes(q);
+  });
+  const groups = new Map();
+  for (const it of items) {
+    if (!groups.has(it.folder)) groups.set(it.folder, []);
+    groups.get(it.folder).push(it);
+  }
+  const main = document.getElementById("main");
+  if (!items.length) {
+    main.innerHTML = '<div class="empty">😶 没有匹配的网站</div>';
+    return;
+  }
+  main.innerHTML = [...groups.entries()]
+    .map(([folder, list]) =>
+      `<section><h2>${escapeHtml(folder)}</h2><div class="grid">${list.map(cardHTML).join("")}</div></section>`)
+    .join("");
+}
+
+document.getElementById("search").addEventListener("input", e => { query = e.target.value; render(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+    e.preventDefault();
+    document.getElementById("search").focus();
+  }
+  if (e.key === "Escape") {
+    const s = document.getElementById("search");
+    s.value = ""; query = ""; s.blur(); render();
+  }
+});
+load();
+</script>
+</body>
+</html>
