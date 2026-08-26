@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-26T13:46:16",
+ "updated": "2026-08-26T13:47:18",
  "items": [
   {
    "url": "https://chatgpt.com/",
@@ -293,13 +293,6 @@
    "title": "onlinelibrary.wiley.com",
    "host": "onlinelibrary.wiley.com",
    "folder": "文献",
-   "pinned": false
-  },
-  {
-   "url": "https://outlook.cloud.microsoft/mail/",
-   "title": "Outlook",
-   "host": "outlook.cloud.microsoft",
-   "folder": "常用",
    "pinned": false
   },
   {
