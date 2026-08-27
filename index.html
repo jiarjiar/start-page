@@ -189,8 +189,9 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
   margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--text); z-index: 3;
 }
 .wrow { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
-.w12h { display: flex; overflow-x: auto; gap: 2px; flex: 1; min-width: 0; scrollbar-width: none; }
-.w12h::-webkit-scrollbar { display: none; }
+.w12h { display: flex; overflow-x: auto; gap: 2px; flex: 1; min-width: 0; padding-bottom: 4px; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.3) transparent; }
+.w12h::-webkit-scrollbar { height: 6px; }
+.w12h::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 3px; }
 .wslot { min-width: 46px; text-align: center; font-size: 10px; color: var(--muted); }
 .wslot em { display: block; font-style: normal; font-size: 16px; }
 .wslot b { display: block; font-size: 13px; color: var(--text); font-weight: 600; }
@@ -527,11 +528,11 @@ async function loadWeather() {
     /* 香港: Open-Meteo */
     const hkD = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=22.3193&longitude=114.1694&timezone=Asia%2FHong_Kong&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code`)).json();
 
-    /* 未来 12 小时 (每 2h): NWS hourly periods (从当前整点起) */
+    /* 未来 24 小时 (每 1h): NWS hourly periods (从当前整点起) */
     const hp = cpN.hp;
     const slots = [];
-    for (let i = 0; i < 6; i++) {
-      const p = hp[i * 2];
+    for (let i = 0; i < 24; i++) {
+      const p = hp[i];
       if (!p) break;
       const hour = parseInt(p.startTime.slice(11, 13), 10);
       slots.push(`<span class="wslot">${hour}时<em>${wxFromText(p.shortForecast, p.isDaytime)}</em><b>${f2c(p.temperature)}°</b></span>`);
