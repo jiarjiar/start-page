@@ -246,7 +246,8 @@ const CUSTOM_ICONS = {
   "maps.google.com": "https://api.iconify.design/logos:google-maps.svg",
   "mail.google.com": "https://api.iconify.design/logos:google-gmail.svg",
   "drive.google.com": "https://api.iconify.design/logos:google-drive.svg",
-  "translate.google.com": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
+  "translate.google.com": "https://icon.horse/icon/translate.google.com",
+  "remotedesktop.google.com": "https://icon.horse/icon/remotedesktop.google.com",
   "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
   "19x19.com": "https://19x19.com/favicon.ico",
   /* 以下站点 s2 服务有正版图标 (root favicon 拿不到), 显式指定 */
@@ -322,10 +323,16 @@ function hashHue(s) {
   return h;
 }
 
-/* 图标链: 定制表 > 站点根favicon; 失败→白底字母块 (统一白色填充) */
+/* 图标链: 定制表(高清/正版) > 站点根favicon > icon.horse(256px高清,无灰点) > 白底字母块 */
 function iconFallback(img) {
-  img.remove();
-  img.parentElement.textContent = img.dataset.letter;
+  const stage = +(img.dataset.stage || 0);
+  if (stage === 0) {
+    img.dataset.stage = 1;
+    img.src = "https://icon.horse/icon/" + img.dataset.host;
+  } else {
+    img.remove();
+    img.parentElement.textContent = img.dataset.letter;
+  }
 }
 
 function cardHTML(it) {
