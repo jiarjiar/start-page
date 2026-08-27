@@ -391,6 +391,8 @@ function render() {
 
 /* ---------- 天气仪表盘 (Open-Meteo 免费 API, 无需密钥) ---------- */
 let weatherHTML = '<div class="wbox"><div class="werr">🌐 天气加载中…</div></div>';
+let wxTimer = null;   // 每小时刷新定时器 (避免重复注册)
+const WX_REFRESH = 3600 * 1000;  // 1 小时
 const WEEK = ["日", "一", "二", "三", "四", "五", "六"];
 
 function wmoEmoji(code, isDay = true) {
@@ -547,6 +549,7 @@ async function loadWeather() {
       <div class="wdays">${dayRow(cp.daily, 0)}${dayRow(cp.daily, 1)}${dayRow(cp.daily, 2)}${dayRow(cp.daily, 3)}${dayRow(cp.daily, 4)}${dayRow(cp.daily, 5)}${dayRow(cp.daily, 6)}</div>
       <div class="wcities">${cityRow(bos, "Boston")}${cityRow(nyc, "NYC")}${cityRow(hkD, "香港")}</div>
     </div>`;
+    if (!wxTimer) wxTimer = setInterval(loadWeather, WX_REFRESH);  // 每小时自动刷新
   } catch (e) {
     weatherHTML = '<div class="wbox"><div class="werr">🌐 天气加载失败 (稍后自动重试)</div></div>';
     setTimeout(loadWeather, 60000);
