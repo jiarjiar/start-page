@@ -488,49 +488,74 @@ function updateAnalog() {
 
 async function loadWeather() {
   try {
-    const P = "&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset&hourly=temperature_2m,weather_code";
-    const us = `https://api.open-meteo.com/v1/forecast?latitude=38.9807,42.3601,40.7128&longitude=-76.9368,-71.0589,-74.0060&timezone=America%2FNew_York${P}`;
-    const hk = `https://api.open-meteo.com/v1/forecast?latitude=22.3193&longitude=114.1694&timezone=Asia%2FHong_Kong${P}`;
-    const [r1, r2] = await Promise.all([fetch(us), fetch(hk)]);
-    const [cp, bos, nyc] = await r1.json();
-    const hkD = await r2.json();
-
-    // 未来 12 小时(每 2h 一档): 从当前小时起
-    // ⚠️ hourly.time 是东岸本地时间, 必须用 getHours() 而非 toISOString()(UTC) 对齐
-    const hourly = cp.hourly;
-    const nowH = new Date().getHours();
-    let start = 0;
-    for (let i = 0; i < hourly.time.length; i++) {
-      if (parseInt(hourly.time[i].slice(11, 13), 10) >= nowH) { start = i; break; }
-    }
-    const slots = [];
-    for (let i = 0; i < 6; i++) {
-      const idx = start + i * 2;
-      if (idx >= hourly.time.length) break;
-      const t = hourly.time[idx];
-      const hour = parseInt(t.slice(11, 13), 10);
-      slots.push(
-        `<span class="wslot">${hour}时<em>${wmoEmoji(hourly.weather_code[idx])}</em><b>${Math.round(hourly.temperature_2m[idx])}°</b></span>`
-      );
-    }
-
-    const dayRow = (D, i) => {
-      const day = new Date(D.time[i] + "T12:00:00");
-      return `<span class="wday">周${WEEK[day.getDay()]}<em>${wmoEmoji(D.weather_code[i])}</em><b>${Math.round(D.temperature_2m_max[i])}°/${Math.round(D.temperature_2m_min[i])}°</b></span>`;
+    /* ===== 美国三城: NWS 官方源 (api.weather.gov, 与 weather.com 同级权威) =====
+       NWS 温度单位 ℉ → 显示 °C; 香港无 NWS → 保留 Open-Meteo */
+    const f2c = (f) => Math.round((f - 32) * 5 / 9);
+    const wxFromText = (t, isDay) => {
+      if (!isDay) return "🌙";
+      const s = (t || "").toLowerCase();
+      if (s.includes("thunder")) return "⛈️";
+      if (s.includes("snow") || s.includes("sleet")) return "🌨️";
+      if (s.includes("shower")) return "🌦️";
+      if (s.includes("rain")) return "🌧️";
+      if (s.includes("fog") || s.includes("mist")) return "🌫️";
+      if (s.includes("partly") || s.includes("mostly cloud")) return "⛅";
+      if (s.includes("cloud")) return "☁️";
+      if (s.includes("sun") || s.includes("clear")) return "☀️";
+      return "🌤️";
     };
-    const cityRow = (D, name) => {
-      const c = D.current;
-      const hi = Math.round(D.daily.temperature_2m_max[0]);
-      const lo = Math.round(D.daily.temperature_2m_min[0]);
-      return `<span class="wcity">${name}<em>${wmoEmoji(c.weather_code, c.is_day)}</em><b>${Math.round(c.temperature_2m)}°</b> <span style="font-size:9px">${hi}°/${lo}°</span></span>`;
-    };
+    async function nws(lat, lon) {
+      const pts = await (await fetch(`https://api.weather.gov/points/${lat},${lon}`)).json();
+      const [h, d] = await Promise.all([
+        fetch(pts.properties.forecastHourly).then(x => x.json()),
+        fetch(pts.properties.forecast).then(x => x.json()),
+      ]);
+      return { hp: h.properties.periods, dp: d.properties.periods };
+    }
+    const [cpN, bosN, nycN] = await Promise.all([
+      nws(38.9807, -76.9368), nws(42.3601, -71.0589), nws(40.7128, -74.0060),
+    ]);
 
-    /* 日出日落 (同 timezone 的 ISO 时间, 取 HH:MM) + 供天空背景用 */
+    /* CP 日出日落: Open-Meteo (NWS 无此字段; 天空背景用) */
+    const om = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=38.9807&longitude=-76.9368&daily=sunrise,sunset&timezone=America%2FNew_York`)).json();
     const sun = (x) => x && x.length >= 16 ? x.slice(11, 16) : "--:--";
     skyTimes = {
-      sunrise: new Date(cp.daily.sunrise[0].slice(0, 16)),
-      sunset: new Date(cp.daily.sunset[0].slice(0, 16)),
+      sunrise: new Date(om.daily.sunrise[0].slice(0, 16)),
+      sunset: new Date(om.daily.sunset[0].slice(0, 16)),
     };
+
+    /* 香港: Open-Meteo */
+    const hkD = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=22.3193&longitude=114.1694&timezone=Asia%2FHong_Kong&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code`)).json();
+
+    /* 未来 12 小时 (每 2h): NWS hourly periods (从当前整点起) */
+    const hp = cpN.hp;
+    const slots = [];
+    for (let i = 0; i < 6; i++) {
+      const p = hp[i * 2];
+      if (!p) break;
+      const hour = parseInt(p.startTime.slice(11, 13), 10);
+      slots.push(`<span class="wslot">${hour}时<em>${wxFromText(p.shortForecast, p.isDaytime)}</em><b>${f2c(p.temperature)}°</b></span>`);
+    }
+
+    /* 7 天: NWS 白天时段 (取后一夜间段为最低温) */
+    const daysP = cpN.dp.filter(p => p.isDaytime).slice(0, 7);
+    const dayRow = (i) => {
+      const day = new Date(daysP[i].startTime);
+      const nxt = cpN.dp[cpN.dp.indexOf(daysP[i]) + 1];
+      const lo = nxt ? f2c(nxt.temperature) : f2c(daysP[i].temperature);
+      return `<span class="wday">周${WEEK[day.getDay()]}<em>${wxFromText(daysP[i].shortForecast, true)}</em><b>${f2c(daysP[i].temperature)}°/${lo}°</b></span>`;
+    };
+
+    const cityRow = (name, emoji, t, hi, lo) =>
+      `<span class="wcity">${name}<em>${emoji}</em><b>${t}°</b> <span style="font-size:9px">${hi}°/${lo}°</span></span>`;
+    const nwsCity = (D, name) => {
+      const cur = D.hp[0];
+      const day = D.dp.filter(p => p.isDaytime)[0];
+      const night = D.dp.find(p => !p.isDaytime);
+      return cityRow(name, wxFromText(cur.shortForecast, cur.isDaytime), f2c(cur.temperature),
+        f2c(day ? day.temperature : cur.temperature), f2c(night ? night.temperature : cur.temperature));
+    };
+
     weatherHTML = `<div class="wbox">
       <div class="wtopic">
         <div class="aclock"><div class="aface">
@@ -539,15 +564,15 @@ async function loadWeather() {
         </div></div>
         <div class="winfo">
           <div class="wdate" id="wdate">—</div>
-          <div class="wcur">${wmoEmoji(cp.current.weather_code, cp.current.is_day)} ${Math.round(cp.current.temperature_2m)}° College Park</div>
-          <div class="wsun">🌅 日出 ${sun(cp.daily.sunrise[0])} · 🌇 日落 ${sun(cp.daily.sunset[0])}</div>
+          <div class="wcur">${wxFromText(cpN.hp[0].shortForecast, cpN.hp[0].isDaytime)} ${f2c(cpN.hp[0].temperature)}° College Park</div>
+          <div class="wsun">🌅 日出 ${sun(om.daily.sunrise[0])} · 🌇 日落 ${sun(om.daily.sunset[0])} · 🛰 NWS</div>
         </div>
       </div>
       <div class="wrow">
         <div class="w12h">${slots.join("")}</div>
       </div>
-      <div class="wdays">${dayRow(cp.daily, 0)}${dayRow(cp.daily, 1)}${dayRow(cp.daily, 2)}${dayRow(cp.daily, 3)}${dayRow(cp.daily, 4)}${dayRow(cp.daily, 5)}${dayRow(cp.daily, 6)}</div>
-      <div class="wcities">${cityRow(bos, "Boston")}${cityRow(nyc, "NYC")}${cityRow(hkD, "香港")}</div>
+      <div class="wdays">${dayRow(0)}${dayRow(1)}${dayRow(2)}${dayRow(3)}${dayRow(4)}${dayRow(5)}${dayRow(6)}</div>
+      <div class="wcities">${nwsCity(bosN, "Boston")}${nwsCity(nycN, "NYC")}${cityRow("香港", wmoEmoji(hkD.current.weather_code, hkD.current.is_day), Math.round(hkD.current.temperature_2m), Math.round(hkD.daily.temperature_2m_max[0]), Math.round(hkD.daily.temperature_2m_min[0]))}</div>
     </div>`;
     if (!wxTimer) wxTimer = setInterval(loadWeather, WX_REFRESH);  // 每小时自动刷新
   } catch (e) {
