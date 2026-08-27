@@ -27,10 +27,27 @@ body {
   background: var(--bg); color: var(--text); min-height: 100vh;
   transition: background .3s, color .3s;
 }
+/* ---------- 动态天空背景 (白天→晚霞→夜景, 随日落时间自动切换) ---------- */
+.sky {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  transition: opacity 1.2s linear;
+}
+.sky-day { opacity: 1; background: linear-gradient(180deg, #79b6e8 0%, #a9d3f0 45%, #dbeeF8 100%); }
+.sky-dusk { opacity: 0; background: linear-gradient(180deg, #2c3e6b 0%, #a94e78 26%, #ef9a54 52%, #f7c873 70%, #e8b168 100%); }
+.sky-night { opacity: 0; background: linear-gradient(180deg, #05070f 0%, #0d1b3d 45%, #1b3161 100%); }
+@media (prefers-color-scheme: dark) {
+  .sky-day { background: linear-gradient(180deg, #2f5d91 0%, #4878aa 45%, #6b93bf 100%); }
+  .sky-dusk { background: linear-gradient(180deg, #1c2a52 0%, #7d4470 26%, #c97b45 52%, #e0a75c 70%, #b57f4f 100%); }
+}
+.star {
+  position: absolute; background: #fff; border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .2; } to { opacity: 1; } }
 header {
   position: sticky; top: 0; z-index: 10;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg) 66%, transparent);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
   padding: 16px 20px 12px;
   display: flex; flex-direction: column; gap: 12px; align-items: center;
@@ -189,6 +206,9 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px
 </style>
 </head>
 <body>
+<div class="sky sky-day"></div>
+<div class="sky sky-dusk"></div>
+<div class="sky sky-night"></div>
 <header>
   <div class="hrow">
     <h1>🚀 我的常用导航<span class="dot">.</span></h1>
@@ -372,6 +392,53 @@ function wmoEmoji(code, isDay = true) {
   return "🌤️";
 }
 
+/* ---------- 动态天空: 白天→晚霞→夜景 (基于日出日落) ---------- */
+let skyTimes = null; // {sunrise, sunset} Date
+const skyLayer = { day: null, dusk: null, night: null };
+let lastSkyKey = "";
+
+function initSky() {
+  skyLayer.day = document.querySelector(".sky-day");
+  skyLayer.dusk = document.querySelector(".sky-dusk");
+  skyLayer.night = document.querySelector(".sky-night");
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement("i");
+    s.className = "star";
+    s.style.left = (Math.random() * 100) + "%";
+    s.style.top = (Math.random() * 100) + "%";
+    const sz = 1 + Math.random() * 2;
+    s.style.width = sz + "px";
+    s.style.height = sz + "px";
+    s.style.animationDelay = (Math.random() * 3) + "s";
+    s.style.animationDuration = (2 + Math.random() * 3) + "s";
+    skyLayer.night.appendChild(s);
+  }
+}
+
+function updateSky() {
+  const now = new Date();
+  let day = 1, dusk = 0, night = 0;
+  if (skyTimes) {
+    const dStart = new Date(skyTimes.sunset.getTime() - 30 * 60000); // 日落前30min
+    const dEnd = new Date(skyTimes.sunset.getTime() + 30 * 60000);    // 日落后30min
+    if (now > dStart && now < dEnd) {
+      const p = (now - dStart) / (dEnd - dStart);
+      dusk = 1 - Math.abs(p - 0.5) * 2;  // 日落点达峰值
+      day = 1 - dusk; night = dusk * 0.9;
+    } else if (now >= dEnd || now < skyTimes.sunrise) {
+      day = 0; dusk = 0; night = 1;
+    } else {
+      day = 1; dusk = 0; night = 0;
+    }
+  }
+  const key = [day, dusk, night].map(v => Math.round(v * 100)).join(",");
+  if (key === lastSkyKey || !skyLayer.day) return;
+  lastSkyKey = key;
+  skyLayer.day.style.opacity = day;
+  skyLayer.dusk.style.opacity = dusk;
+  skyLayer.night.style.opacity = Math.max(night, dusk * 0.4);
+}
+
 function updateClock() {
   const now = new Date();
   const d = document.getElementById("wdate");
@@ -431,8 +498,12 @@ async function loadWeather() {
       return `<span class="wcity">${name}<em>${wmoEmoji(c.weather_code, c.is_day)}</em><b>${Math.round(c.temperature_2m)}°</b> <span style="font-size:9px">${hi}°/${lo}°</span></span>`;
     };
 
-    /* 日出日落 (同 timezone 的 ISO 时间, 取 HH:MM) */
+    /* 日出日落 (同 timezone 的 ISO 时间, 取 HH:MM) + 供天空背景用 */
     const sun = (x) => x && x.length >= 16 ? x.slice(11, 16) : "--:--";
+    skyTimes = {
+      sunrise: new Date(cp.daily.sunrise[0].slice(0, 16)),
+      sunset: new Date(cp.daily.sunset[0].slice(0, 16)),
+    };
     weatherHTML = `<div class="wbox">
       <div class="wtopic">
         <div class="aclock"><div class="aface">
@@ -519,8 +590,11 @@ document.addEventListener("keydown", e => {
 });
 load();
 loadWeather();
+initSky();
+updateSky();
 setInterval(updateClock, 1000);
 setInterval(updateAnalog, 100);
+setInterval(updateSky, 30000);
 updateClock();
 updateAnalog();
 </script>
