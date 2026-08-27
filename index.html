@@ -264,6 +264,15 @@ const CUSTOM_ICONS = {
   "live.bilibili.com": "https://www.google.com/s2/favicons?domain=live.bilibili.com&sz=64",
 };
 
+/* favicon 为白/透明图案的站 → 直接用白底黑字母, 避免"白底白图标"看不见 */
+const LETTER_ONLY = [
+  "jiarjiar.github.io",
+  "shidianguji.com",
+  "myleapdrivingacademy.com",
+  "jiarjiar.wixsite.com",
+  "myworkday.com",
+];
+
 /* 三大栏目: folder → 栏目索引 */
 const COLUMNS = [
   { key: 0, title: "🤖 AI 助手", folders: ["AI"] },
@@ -323,11 +332,12 @@ function cardHTML(it) {
   const hue = hashHue(it.host);
   const letter = (it.title || it.host || "?")[0].toUpperCase();
   const src = CUSTOM_ICONS[it.host] || ("https://" + it.host + "/favicon.ico");
-  const ico =
-    `<div class="ico">` +
-    `<img src="${src}" data-host="${encodeURIComponent(it.host)}" data-letter="${letter.replace(/'/g, "")}" data-stage="0" ` +
-    `loading="lazy" onerror="iconFallback(this)">` +
-    `</div>`;
+  const ico = LETTER_ONLY.includes(it.host)
+    ? `<div class="ico">${letter}</div>`
+    : `<div class="ico">` +
+      `<img src="${src}" data-host="${encodeURIComponent(it.host)}" data-letter="${letter.replace(/'/g, "")}" data-stage="0" ` +
+      `loading="lazy" onerror="iconFallback(this)">` +
+      `</div>`;
   const pin = it.pinned ? '<span class="pin">📌</span>' : "";
   const ops = editing
     ? `<span class="ops"><button class="hide" data-act="hide" title="隐藏">✕</button>` +
