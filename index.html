@@ -32,12 +32,12 @@ body {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   transition: opacity 1.2s linear;
 }
-.sky-day { opacity: 1; background: linear-gradient(180deg, #79b6e8 0%, #a9d3f0 45%, #dbeeF8 100%); }
-.sky-dusk { opacity: 0; background: linear-gradient(180deg, #2c3e6b 0%, #a94e78 26%, #ef9a54 52%, #f7c873 70%, #e8b168 100%); }
-.sky-night { opacity: 0; background: linear-gradient(180deg, #05070f 0%, #0d1b3d 45%, #1b3161 100%); }
+.sky-day { opacity: 1; background: linear-gradient(180deg, #3d7fc4 0%, #6aa6e0 35%, #96c4ee 65%, #bfd9f3 100%); }
+.sky-dusk { opacity: 0; background: linear-gradient(180deg, #1e2b52 0%, #a03a68 24%, #ef9448 48%, #f7bd62 68%, #e0905a 100%); }
+.sky-night { opacity: 0; background: linear-gradient(180deg, #03040a 0%, #0a1430 45%, #173256 100%); }
 @media (prefers-color-scheme: dark) {
-  .sky-day { background: linear-gradient(180deg, #2f5d91 0%, #4878aa 45%, #6b93bf 100%); }
-  .sky-dusk { background: linear-gradient(180deg, #1c2a52 0%, #7d4470 26%, #c97b45 52%, #e0a75c 70%, #b57f4f 100%); }
+  .sky-day { background: linear-gradient(180deg, #15437c 0%, #245e9c 45%, #3d78b5 100%); }
+  .sky-dusk { background: linear-gradient(180deg, #14224a 0%, #6d3a62 24%, #b96a3e 48%, #d99a4e 68%, #9c6a44 100%); }
 }
 .star {
   position: absolute; background: #fff; border-radius: 50%;
@@ -418,18 +418,25 @@ function initSky() {
 function updateSky() {
   const now = new Date();
   let day = 1, dusk = 0, night = 0;
-  if (skyTimes) {
-    const dStart = new Date(skyTimes.sunset.getTime() - 30 * 60000); // 日落前30min
-    const dEnd = new Date(skyTimes.sunset.getTime() + 30 * 60000);    // 日落后30min
-    if (now > dStart && now < dEnd) {
-      const p = (now - dStart) / (dEnd - dStart);
-      dusk = 1 - Math.abs(p - 0.5) * 2;  // 日落点达峰值
-      day = 1 - dusk; night = dusk * 0.9;
-    } else if (now >= dEnd || now < skyTimes.sunrise) {
-      day = 0; dusk = 0; night = 1;
-    } else {
-      day = 1; dusk = 0; night = 0;
-    }
+  // 兜底: 天气未拿到日出日落时, 用本时区近似值 (保证背景仍会随时间变化)
+  let st = skyTimes;
+  if (!st) {
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    st = {
+      sunrise: new Date(today.getTime() + (6 * 3600 + 30 * 60) * 1000),
+      sunset: new Date(today.getTime() + (19 * 3600 + 15 * 60) * 1000),
+    };
+  }
+  const dStart = new Date(st.sunset.getTime() - 30 * 60000); // 日落前30min
+  const dEnd = new Date(st.sunset.getTime() + 30 * 60000);    // 日落后30min
+  if (now > dStart && now < dEnd) {
+    const p = (now - dStart) / (dEnd - dStart);
+    dusk = 1 - Math.abs(p - 0.5) * 2;  // 日落点达峰值
+    day = 1 - dusk; night = dusk * 0.9;
+  } else if (now >= dEnd || now < st.sunrise) {
+    day = 0; dusk = 0; night = 1;
+  } else {
+    day = 1; dusk = 0; night = 0;
   }
   const key = [day, dusk, night].map(v => Math.round(v * 100)).join(",");
   if (key === lastSkyKey || !skyLayer.day) return;
