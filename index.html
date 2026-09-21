@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 我的常用导航</title>
+<style>
+:root {
+  --bg: #f6f8fa; --panel: #ffffff; --border: #d0d7de;
+  --text: #1f2328; --muted: #656d76; --accent: #0969da;
+  --card-border: #d0d7de; --chip-bg: #eef1f4; --shadow: 0 1px 2px rgba(0,0,0,.06);
+  --danger: #d1242f; --op: rgba(255,255,255,.92); --op-border: #d0d7de;
+  --col-bg: rgba(255,255,255,.55);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --card-border: #21262d; --chip-bg: #21262d; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    --danger: #f85149; --op: rgba(22,27,34,.92); --op-border: #30363d;
+    --col-bg: rgba(22,27,34,.5);
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh;
+  transition: background .3s, color .3s;
+}
+/* ---------- 动态天空背景 (白天→晚霞→夜景, 随日落时间自动切换) ---------- */
+.sky {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  transition: opacity 1.2s linear;
+}
+.sky-day { opacity: 1; background: linear-gradient(180deg, #3d7fc4 0%, #6aa6e0 35%, #96c4ee 65%, #bfd9f3 100%); }
+.sky-dusk { opacity: 0; background: linear-gradient(180deg, #1e2b52 0%, #a03a68 24%, #ef9448 48%, #f7bd62 68%, #e0905a 100%); }
+.sky-night { opacity: 0; background: linear-gradient(180deg, #03040a 0%, #0a1430 45%, #173256 100%); }
+@media (prefers-color-scheme: dark) {
+  .sky-day { background: linear-gradient(180deg, #15437c 0%, #245e9c 45%, #3d78b5 100%); }
+  .sky-dusk { background: linear-gradient(180deg, #14224a 0%, #6d3a62 24%, #b96a3e 48%, #d99a4e 68%, #9c6a44 100%); }
+}
+.star {
+  position: absolute; background: #fff; border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .2; } to { opacity: 1; } }
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 66%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hrow { display: flex; align-items: center; gap: 12px; width: min(1240px, 100%); }
+h1 { font-size: 19px; font-weight: 700; letter-spacing: .3px; white-space: nowrap; }
+h1 .dot { color: var(--accent); }
+.btn {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--panel); color: var(--text);
+  transition: all .15s; user-select: none; white-space: nowrap;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn.primary:hover { opacity: .9; color: #fff; }
+#search {
+  flex: 1; min-width: 120px; padding: 9px 14px 9px 38px;
+  font-size: 15px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--panel); color: var(--text); outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 12px center;
+}
+#search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+.columns {
+  max-width: 1400px; margin: 20px auto 40px; padding: 0 20px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start;
+}
+@media (max-width: 980px) { .columns { grid-template-columns: 1fr; } }
+.col {
+  background: var(--col-bg); border: 1px solid var(--border); border-radius: 16px;
+  padding: 16px; min-width: 0;
+}
+.col-head {
+  display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 12px;
+}
+.col-head .cnt { font-size: 12px; color: var(--muted); font-weight: 500; margin-left: auto; white-space: nowrap; }
+.cgroup { margin-bottom: 16px; }
+.cgroup:last-child { margin-bottom: 0; }
+h3 {
+  font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase;
+  letter-spacing: .8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+h3::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 4px; }
+.card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 7px; padding: 12px 6px 10px;
+  background: var(--panel); border: 1px solid var(--card-border); border-radius: 14px;
+  text-decoration: none; color: inherit; box-shadow: var(--shadow);
+  transition: transform .12s, border-color .12s, box-shadow .12s;
+  position: relative;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+.ico {
+  width: 62px; height: 62px; border-radius: 15px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 27px; color: #1f2328; background: rgba(255,255,255,0.7);
+}
+.ico img { width: 100%; height: 100%; border-radius: 15px; }
+.meta { min-width: 0; max-width: 100%; }
+.t {
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.h { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; max-width: 100%; }
+.pin { position: absolute; top: 7px; right: 9px; font-size: 11px; }
+.card .ops { position: absolute; top: -8px; right: -6px; display: none; gap: 4px; }
+body.editing .card:hover .ops { display: flex; }
+.card .ops button {
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--op-border);
+  background: var(--op); color: var(--text); font-size: 13px; cursor: pointer;
+  box-shadow: var(--shadow); transition: transform .1s;
+}
+.card .ops button:hover { transform: scale(1.15); }
+.card .ops .hide:hover { background: var(--danger); color: #fff; }
+.empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 14px; }
+#hiddenbar {
+  max-width: 1080px; margin: 0 auto 30px; padding: 12px 16px;
+  border: 1px dashed var(--border); border-radius: 10px;
+  font-size: 13px; color: var(--muted); display: none;
+}
+#hiddenbar.show { display: block; }
+#hiddenbar .item {
+  display: inline-flex; align-items: center; gap: 6px; margin: 4px 6px 0 0;
+  padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--chip-bg); cursor: pointer; font-size: 12px;
+}
+#hiddenbar .item:hover { border-color: var(--accent); color: var(--accent); }
+dialog {
+  position: fixed; inset: 0; margin: auto; border: 1px solid var(--border);
+  border-radius: 14px; background: var(--panel); color: var(--text);
+  padding: 22px; width: min(420px, 90%); box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h3 { font-size: 16px; margin-bottom: 14px; }
+dialog label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+dialog input {
+  width: 100%; padding: 8px 10px; font-size: 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none;
+}
+dialog input:focus { border-color: var(--accent); }
+.dlg-actions { display: flex; gap: 8px; margin-top: 18px; }
+.dlg-actions .spacer { flex: 1; }
+dialog .hint { font-size: 11px; color: var(--muted); margin-top: 10px; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+
+/* ---------- 天气仪表盘 ---------- */
+.wbox {
+  border: 1px solid var(--border); border-radius: 14px; background: var(--panel);
+  padding: 14px 14px 10px; margin-bottom: 14px; box-shadow: var(--shadow);
+}
+.wtopic { display: flex; gap: 14px; align-items: center; margin-bottom: 4px; }
+.winfo { min-width: 0; }
+.wdate { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.wcur { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.wsun { font-size: 10px; color: var(--muted); margin-top: 4px; }
+/* Analog 表盘 */
+.aclock { width: 118px; height: 118px; flex-shrink: 0; }
+.aface {
+  position: relative; width: 100%; height: 100%; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--bg);
+  background-image: repeating-conic-gradient(var(--muted) 0deg .9deg, transparent .9deg 30deg);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.08);
+}
+.aface::before {
+  content: ""; position: absolute; inset: 9px; border-radius: 50%;
+  background: var(--panel);
+}
+.ahand {
+  position: absolute; bottom: 50%; left: 50%;
+  transform-origin: 50% 100%; border-radius: 3px; z-index: 2;
+}
+.ahand.hr { width: 5px; height: 32%; margin-left: -2.5px; background: var(--text); }
+.ahand.mn { width: 3.5px; height: 41%; margin-left: -1.75px; background: var(--accent); }
+.ahand.sc { width: 1.5px; height: 46%; margin-left: -0.75px; background: var(--danger); }
+.adot {
+  position: absolute; left: 50%; top: 50%; width: 9px; height: 9px;
+  margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--text); z-index: 3;
+}
+.wrow { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.w12h { display: flex; overflow-x: auto; gap: 2px; flex: 1; min-width: 0; padding-bottom: 4px; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.3) transparent; }
+.w12h::-webkit-scrollbar { height: 6px; }
+.w12h::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 3px; }
+.wslot { min-width: 46px; text-align: center; font-size: 10px; color: var(--muted); }
+.wslot em { display: block; font-style: normal; font-size: 16px; }
+.wslot b { display: block; font-size: 13px; color: var(--text); font-weight: 600; }
+.wdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 8px; }
+.wday { text-align: center; font-size: 10px; color: var(--muted); }
+.wday em { display: block; font-style: normal; font-size: 15px; }
+.wday b { display: block; font-size: 10px; color: var(--text); font-weight: 600; margin-top: 1px; }
+.wcities { display: flex; justify-content: space-between; gap: 6px; margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 8px; }
+.wcity { font-size: 10px; color: var(--muted); text-align: center; flex: 1; }
+.wcity em { display: block; font-style: normal; font-size: 14px; }
+.wcity b { display: block; font-size: 13px; color: var(--text); font-weight: 600; }
+.werr { font-size: 11px; color: var(--muted); padding: 6px 0; }
+</style>
+</head>
+<body>
+<div class="sky sky-day"></div>
+<div class="sky sky-dusk"></div>
+<div class="sky sky-night"></div>
+<header>
+  <div class="hrow">
+    <h1>🚀 我的常用导航<span class="dot">.</span></h1>
+    <button class="btn" id="editBtn" title="隐藏/修改链接">✏️ 编辑</button>
+    <button class="btn primary" id="exportBtn" style="display:none">📦 导出规则</button>
+    <button class="btn" id="doneBtn" style="display:none">✅ 完成</button>
+    <input id="search" type="text" placeholder="搜索网站 / 域名…  (按 / 聚焦)" autocomplete="off">
+  </div>
+</header>
+<main class="columns" id="main"></main>
+<div id="hiddenbar">
+  <b>😶 已隐藏的网站 (点一下恢复):</b>
+  <div id="hiddenlist" style="margin-top:6px"></div>
+</div>
+<dialog id="editdlg">
+  <h3>✏️ 编辑链接</h3>
+  <label>标题 (留空=恢复默认)</label>
+  <input id="e-title" type="text">
+  <label>网址 (留空=恢复默认)</label>
+  <input id="e-url" type="text">
+  <div class="dlg-actions">
+    <span class="spacer"></span>
+    <button class="btn" id="e-cancel">取消</button>
+    <button class="btn primary" id="e-save">保存</button>
+  </div>
+  <div class="hint">只保存在本机浏览器 (localStorage)，不影响其他设备；要永久修改请编辑 data.json。</div>
+</dialog>
+<footer>个人导航页 · 列表手工维护 · 天气来自 NWS / Open-Meteo</footer>
+
+<script>
+const LS_KEY = "sp_custom_v1";
+/* 定制图标: 部分站点 s2 服务返回通用 logo, 这里用官方图标替换 */
+const CUSTOM_ICONS = {
+  "calendar.google.com": "https://api.iconify.design/logos:google-calendar.svg",
+  "maps.google.com": "https://api.iconify.design/logos:google-maps.svg",
+  "mail.google.com": "https://api.iconify.design/logos:google-gmail.svg",
+  "drive.google.com": "https://api.iconify.design/logos:google-drive.svg",
+  "discord.com": "https://api.iconify.design/logos:discord-icon.svg",
+  "translate.google.com": "https://icon.horse/icon/translate.google.com",
+  "remotedesktop.google.com": "https://icon.horse/icon/remotedesktop.google.com",
+  "101weiqi.com": "https://www.101weiqi.com/favicon.ico",
+  "19x19.com": "https://19x19.com/favicon.ico",
+  /* 以下站点 s2 服务有正版图标 (root favicon 拿不到), 显式指定 */
+  "gemini.google.com": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64",
+  "chat.deepseek.com": "https://www.google.com/s2/favicons?domain=chat.deepseek.com&sz=64",
+  "platform.deepseek.com": "https://www.google.com/s2/favicons?domain=platform.deepseek.com&sz=64",
+  "ollama.com": "https://www.google.com/s2/favicons?domain=ollama.com&sz=64",
+  "chatgpt.com": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64",
+  "z.ai": "https://www.google.com/s2/favicons?domain=z.ai&sz=64",
+  "linkedin.com": "https://www.google.com/s2/favicons?domain=linkedin.com&sz=64",
+  "iyf.tv": "https://www.google.com/s2/favicons?domain=iyf.tv&sz=64",
+  /* bilibili 系 favicon 是白色透明底, 白卡片上会隐身 → 用 s2 彩色版 */
+  "bilibili.com": "https://www.google.com/s2/favicons?domain=bilibili.com&sz=64",
+  "search.bilibili.com": "https://www.google.com/s2/favicons?domain=search.bilibili.com&sz=64",
+  "live.bilibili.com": "https://www.google.com/s2/favicons?domain=live.bilibili.com&sz=64",
+};
+
+/* favicon 为白/透明图案的站 → 直接用白底黑字母, 避免"白底白图标"看不见 */
+const LETTER_ONLY = [
+  "jiarjiar.github.io",
+  "shidianguji.com",
+  "myleapdrivingacademy.com",
+  "jiarjiar.wixsite.com",
+  "myworkday.com",
+];
+
+/* 三大栏目: folder → 栏目索引 */
+const COLUMNS = [
+  { key: 0, title: "🤖 AI 助手", folders: ["AI"] },
+  { key: 1, title: "🧪 工作 · 研究", folders: ["常用", "工具", "文献", "UMD", "work", "KE", "lab", "job", "appl"] },
+  { key: 2, title: "🎮 生活 · 娱乐", folders: ["视频", "围棋", "社交", "归档", "其他", "mobile", "3dp", "habi"] },
+];
+function colOf(folder) {
+  for (const c of COLUMNS) if (c.folders.includes(folder)) return c.key;
+  return 2; // 未知分类 → 生活栏
+}
+
+let data = [];
+let query = "";
+let editing = false;
+let custom = loadLS();
+let editHost = null;
+
+function loadLS() {
+  try {
+    const c = JSON.parse(localStorage.getItem(LS_KEY) || "null");
+    return { hidden: [], rename: {}, override_url: {}, ...(c || {}) };
+  } catch { return { hidden: [], rename: {}, override_url: {} }; }
+}
+function saveLS() { localStorage.setItem(LS_KEY, JSON.stringify(custom)); }
+function matchRule(it, rule) {
+  return rule.includes("://") ? it.url.startsWith(rule) : it.host === rule;
+}
+function effective(it) {
+  return { ...it, title: custom.rename[it.host] || it.title, url: custom.override_url[it.host] || it.url };
+}
+
+async function load() {
+  try {
+    const r = await fetch("data.json?v=" + Date.now());
+    data = (await r.json()).items || [];
+  } catch (e) {
+    document.getElementById("main").innerHTML =
+      '<div class="empty">⚠️ data.json 加载失败 — 检查该文件是否存在</div>';
+    return;
+  }
+  render();
+}
+
+function hashHue(s) {
+  let h = 0;
+  for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  return h;
+}
+
+/* 图标链: 定制表(高清/正版) > 站点根favicon > icon.horse(256px高清,无灰点) > 白底字母块 */
+function iconFallback(img) {
+  const stage = +(img.dataset.stage || 0);
+  if (stage === 0) {
+    img.dataset.stage = 1;
+    img.src = "https://icon.horse/icon/" + img.dataset.host;
+  } else {
+    img.remove();
+    img.parentElement.textContent = img.dataset.letter;
+  }
+}
+
+function cardHTML(it) {
+  const hue = hashHue(it.host);
+  const letter = (it.title || it.host || "?")[0].toUpperCase();
+  const src = CUSTOM_ICONS[it.host] || ("https://" + it.host + "/favicon.ico");
+  const ico = LETTER_ONLY.includes(it.host)
+    ? `<div class="ico">${letter}</div>`
+    : `<div class="ico">` +
+      `<img src="${src}" data-host="${encodeURIComponent(it.host)}" data-letter="${letter.replace(/'/g, "")}" data-stage="0" ` +
+      `loading="lazy" onerror="iconFallback(this)">` +
+      `</div>`;
+  const pin = it.pinned ? '<span class="pin">📌</span>' : "";
+  const ops = editing
+    ? `<span class="ops"><button class="hide" data-act="hide" title="隐藏">✕</button>` +
+      `<button data-act="edit" title="改标题/网址">✎</button></span>` : "";
+  return `<a class="card" href="${it.url}" target="_blank" rel="noopener" data-host="${it.host}">${pin}${ops}${ico}` +
+    `<div class="meta"><div class="t">${escapeHtml(it.title || it.host)}</div>` +
+    `<div class="h">${escapeHtml(it.host)}</div></div></a>`;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function render() {
+  const q = query.trim().toLowerCase();
+  const items = data.filter(it => {
+    if (custom.hidden.some(h => matchRule(it, h))) return false;
+    if (!q) return true;
+    const e = effective(it);
+    return (e.title + " " + it.host + " " + e.url).toLowerCase().includes(q);
+  });
+  const main = document.getElementById("main");
+  if (!items.length) {
+    main.innerHTML = '<div class="empty">😶 没有匹配的网站</div>';
+    return;
+  }
+  main.innerHTML = COLUMNS.map(col => {
+    const colItems = items.filter(it => colOf(it.folder) === col.key);
+    if (!colItems.length) return "";
+    const groups = new Map();
+    for (const it of colItems) {
+      if (!groups.has(it.folder)) groups.set(it.folder, []);
+      groups.get(it.folder).push(it);
+    }
+    const body = [...groups.entries()]
+      .map(([folder, list]) =>
+        `<div class="cgroup"><h3>${escapeHtml(folder)}</h3><div class="grid">${list.map(cardHTML).join("")}</div></div>`)
+      .join("");
+    const dash = col.key === 0 ? weatherHTML : "";
+    return `<section class="col"><div class="col-head">${col.title}<span class="cnt">${colItems.length} 个</span></div>${dash}${body}</section>`;
+  }).join("");
+  renderHiddenBar();
+}
+
+/* ---------- 天气仪表盘 (Open-Meteo 免费 API, 无需密钥) ---------- */
+let weatherHTML = '<div class="wbox"><div class="werr">🌐 天气加载中…</div></div>';
+let wxTimer = null;   // 每小时刷新定时器 (避免重复注册)
+const WX_REFRESH = 3600 * 1000;  // 1 小时
+const WEEK = ["日", "一", "二", "三", "四", "五", "六"];
+
+function wmoEmoji(code, isDay = true) {
+  if (!isDay) return "🌙";
+  if (code === 0) return "☀️";
+  if (code === 1) return "🌤️";
+  if (code === 2) return "⛅";
+  if (code === 3) return "☁️";
+  if (code === 45 || code === 48) return "🌫️";
+  if (code >= 51 && code <= 57) return "🌦️";
+  if (code >= 61 && code <= 65) return "🌧️";
+  if (code >= 66 && code <= 67) return "🌧️";
+  if (code >= 71 && code <= 77) return "🌨️";
+  if (code >= 80 && code <= 82) return "🌦️";
+  if (code === 85 || code === 86) return "🌨️";
+  if (code >= 95) return "⛈️";
+  return "🌤️";
+}
+
+/* ---------- 动态天空: 白天→晚霞→夜景 (基于日出日落) ---------- */
+let skyTimes = null; // {sunrise, sunset} Date
+const skyLayer = { day: null, dusk: null, night: null };
+let lastSkyKey = "";
+
+function initSky() {
+  skyLayer.day = document.querySelector(".sky-day");
+  skyLayer.dusk = document.querySelector(".sky-dusk");
+  skyLayer.night = document.querySelector(".sky-night");
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement("i");
+    s.className = "star";
+    s.style.left = (Math.random() * 100) + "%";
+    s.style.top = (Math.random() * 100) + "%";
+    const sz = 1 + Math.random() * 2;
+    s.style.width = sz + "px";
+    s.style.height = sz + "px";
+    s.style.animationDelay = (Math.random() * 3) + "s";
+    s.style.animationDuration = (2 + Math.random() * 3) + "s";
+    skyLayer.night.appendChild(s);
+  }
+}
+
+function updateSky() {
+  const now = new Date();
+  let day = 1, dusk = 0, night = 0;
+  // 兜底: 天气未拿到日出日落时, 用本时区近似值 (保证背景仍会随时间变化)
+  let st = skyTimes;
+  if (!st) {
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    st = {
+      sunrise: new Date(today.getTime() + (6 * 3600 + 30 * 60) * 1000),
+      sunset: new Date(today.getTime() + (19 * 3600 + 15 * 60) * 1000),
+    };
+  }
+  const dStart = new Date(st.sunset.getTime() - 30 * 60000); // 日落前30min
+  const dEnd = new Date(st.sunset.getTime() + 30 * 60000);    // 日落后30min
+  if (now > dStart && now < dEnd) {
+    const p = (now - dStart) / (dEnd - dStart);
+    dusk = 1 - Math.abs(p - 0.5) * 2;  // 日落点达峰值
+    day = 1 - dusk; night = dusk * 0.9;
+  } else if (now >= dEnd || now < st.sunrise) {
+    day = 0; dusk = 0; night = 1;
+  } else {
+    day = 1; dusk = 0; night = 0;
+  }
+  const key = [day, dusk, night].map(v => Math.round(v * 100)).join(",");
+  if (key === lastSkyKey || !skyLayer.day) return;
+  lastSkyKey = key;
+  skyLayer.day.style.opacity = day;
+  skyLayer.dusk.style.opacity = dusk;
+  skyLayer.night.style.opacity = Math.max(night, dusk * 0.4);
+}
+
+function updateClock() {
+  const now = new Date();
+  const d = document.getElementById("wdate");
+  if (d) d.textContent = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 · 星期${WEEK[now.getDay()]}`;
+}
+
+/* Analog 指针 (100ms 平滑, 带毫秒的秒针) */
+function updateAnalog() {
+  const now = new Date();
+  const s = now.getSeconds() + now.getMilliseconds() / 1000;
+  const m = now.getMinutes() + s / 60;
+  const h = (now.getHours() % 12) + m / 60;
+  const hr = document.querySelector(".ahand.hr");
+  const mn = document.querySelector(".ahand.mn");
+  const sc = document.querySelector(".ahand.sc");
+  if (hr) hr.style.transform = `rotate(${h * 30}deg)`;
+  if (mn) mn.style.transform = `rotate(${m * 6}deg)`;
+  if (sc) sc.style.transform = `rotate(${s * 6}deg)`;
+}
+
+async function loadWeather() {
+  try {
+    /* ===== 美国三城: NWS 官方源 (api.weather.gov, 与 weather.com 同级权威) =====
+       NWS 温度单位 ℉ → 显示 °C; 香港无 NWS → 保留 Open-Meteo */
+    const f2c = (f) => Math.round((f - 32) * 5 / 9);
+    const wxFromText = (t, isDay) => {
+      if (!isDay) return "🌙";
+      const s = (t || "").toLowerCase();
+      if (s.includes("thunder")) return "⛈️";
+      if (s.includes("snow") || s.includes("sleet")) return "🌨️";
+      if (s.includes("shower")) return "🌦️";
+      if (s.includes("rain")) return "🌧️";
+      if (s.includes("fog") || s.includes("mist")) return "🌫️";
+      if (s.includes("partly") || s.includes("mostly cloud")) return "⛅";
+      if (s.includes("cloud")) return "☁️";
+      if (s.includes("sun") || s.includes("clear")) return "☀️";
+      return "🌤️";
+    };
+    async function nws(lat, lon) {
+      const pts = await (await fetch(`https://api.weather.gov/points/${lat},${lon}`)).json();
+      const [h, d] = await Promise.all([
+        fetch(pts.properties.forecastHourly).then(x => x.json()),
+        fetch(pts.properties.forecast).then(x => x.json()),
+      ]);
+      return { hp: h.properties.periods, dp: d.properties.periods };
+    }
+    const [cpN, bosN, nycN] = await Promise.all([
+      nws(38.9807, -76.9368), nws(42.3601, -71.0589), nws(40.7128, -74.0060),
+    ]);
+
+    /* CP 日出日落: Open-Meteo (NWS 无此字段; 天空背景用) */
+    const om = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=38.9807&longitude=-76.9368&daily=sunrise,sunset&timezone=America%2FNew_York`)).json();
+    const sun = (x) => x && x.length >= 16 ? x.slice(11, 16) : "--:--";
+    skyTimes = {
+      sunrise: new Date(om.daily.sunrise[0].slice(0, 16)),
+      sunset: new Date(om.daily.sunset[0].slice(0, 16)),
+    };
+
+    /* 香港: Open-Meteo */
+    const hkD = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=22.3193&longitude=114.1694&timezone=Asia%2FHong_Kong&current=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code`)).json();
+
+    /* 未来 24 小时 (每 1h): NWS hourly periods (从当前整点起) */
+    const hp = cpN.hp;
+    const slots = [];
+    for (let i = 0; i < 24; i++) {
+      const p = hp[i];
+      if (!p) break;
+      const hour = parseInt(p.startTime.slice(11, 13), 10);
+      slots.push(`<span class="wslot">${hour}时<em>${wxFromText(p.shortForecast, p.isDaytime)}</em><b>${f2c(p.temperature)}°</b></span>`);
+    }
+
+    /* 7 天: NWS 白天时段 (取后一夜间段为最低温) */
+    const daysP = cpN.dp.filter(p => p.isDaytime).slice(0, 7);
+    const dayRow = (i) => {
+      const day = new Date(daysP[i].startTime);
+      const nxt = cpN.dp[cpN.dp.indexOf(daysP[i]) + 1];
+      const lo = nxt ? f2c(nxt.temperature) : f2c(daysP[i].temperature);
+      return `<span class="wday">周${WEEK[day.getDay()]}<em>${wxFromText(daysP[i].shortForecast, true)}</em><b>${f2c(daysP[i].temperature)}°/${lo}°</b></span>`;
+    };
+
+    const cityRow = (name, emoji, t, hi, lo) =>
+      `<span class="wcity">${name}<em>${emoji}</em><b>${t}°</b> <span style="font-size:9px">${hi}°/${lo}°</span></span>`;
+    const nwsCity = (D, name) => {
+      const cur = D.hp[0];
+      const day = D.dp.filter(p => p.isDaytime)[0];
+      const night = D.dp.find(p => !p.isDaytime);
+      return cityRow(name, wxFromText(cur.shortForecast, cur.isDaytime), f2c(cur.temperature),
+        f2c(day ? day.temperature : cur.temperature), f2c(night ? night.temperature : cur.temperature));
+    };
+
+    weatherHTML = `<div class="wbox">
+      <div class="wtopic">
+        <div class="aclock"><div class="aface">
+          <div class="ahand hr"></div><div class="ahand mn"></div><div class="ahand sc"></div>
+          <div class="adot"></div>
+        </div></div>
+        <div class="winfo">
+          <div class="wdate" id="wdate">—</div>
+          <div class="wcur">${wxFromText(cpN.hp[0].shortForecast, cpN.hp[0].isDaytime)} ${f2c(cpN.hp[0].temperature)}° College Park</div>
+          <div class="wsun">🌅 日出 ${sun(om.daily.sunrise[0])} · 🌇 日落 ${sun(om.daily.sunset[0])} · 🛰 NWS</div>
+        </div>
+      </div>
+      <div class="wrow">
+        <div class="w12h">${slots.join("")}</div>
+      </div>
+      <div class="wdays">${dayRow(0)}${dayRow(1)}${dayRow(2)}${dayRow(3)}${dayRow(4)}${dayRow(5)}${dayRow(6)}</div>
+      <div class="wcities">${nwsCity(bosN, "Boston")}${nwsCity(nycN, "NYC")}${cityRow("香港", wmoEmoji(hkD.current.weather_code, hkD.current.is_day), Math.round(hkD.current.temperature_2m), Math.round(hkD.daily.temperature_2m_max[0]), Math.round(hkD.daily.temperature_2m_min[0]))}</div>
+    </div>`;
+    if (!wxTimer) wxTimer = setInterval(loadWeather, WX_REFRESH);  // 每小时自动刷新
+  } catch (e) {
+    weatherHTML = '<div class="wbox"><div class="werr">🌐 天气加载失败 (稍后自动重试)</div></div>';
+    setTimeout(loadWeather, 60000);
+  }
+  render();
+}
+
+/* ---------- 编辑模式 ---------- */
+function setEditing(on) {
+  editing = on;
+  document.body.classList.toggle("editing", on);
+  document.getElementById("editBtn").style.display = on ? "none" : "";
+  document.getElementById("exportBtn").style.display = on ? "" : "none";
+  document.getElementById("doneBtn").style.display = on ? "" : "none";
+  render();
+}
+document.getElementById("editBtn").onclick = () => setEditing(true);
+document.getElementById("doneBtn").onclick = () => setEditing(false);
+document.getElementById("exportBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(custom, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "custom.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+document.getElementById("main").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-act]");
+  if (!btn) return;
+  e.preventDefault();
+  const host = btn.closest(".card").dataset.host;
+  if (btn.dataset.act === "hide") {
+    custom.hidden.push(host);
+    saveLS(); render();
+  } else if (btn.dataset.act === "edit") {
+    editHost = host;
+    const it = data.find(x => x.host === host);
+    document.getElementById("e-title").value = (it && custom.rename[host]) || (it && it.title) || "";
+    document.getElementById("e-url").value = (it && (custom.override_url[host] || it.url)) || "";
+    document.getElementById("editdlg").showModal();
+  }
+});
+
+document.getElementById("e-save").onclick = () => {
+  const t = document.getElementById("e-title").value.trim();
+  const u = document.getElementById("e-url").value.trim();
+  if (t) custom.rename[editHost] = t; else delete custom.rename[editHost];
+  if (u) custom.override_url[editHost] = u; else delete custom.override_url[editHost];
+  saveLS();
+  document.getElementById("editdlg").close();
+  render();
+};
+document.getElementById("e-cancel").onclick = () => document.getElementById("editdlg").close();
+
+document.getElementById("search").addEventListener("input", e => { query = e.target.value; render(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+    e.preventDefault();
+    document.getElementById("search").focus();
+  }
+  if (e.key === "Escape") {
+    const s = document.getElementById("search");
+    s.value = ""; query = ""; s.blur(); render();
+  }
+});
+load();
+loadWeather();
+initSky();
+updateSky();
+setInterval(updateClock, 1000);
+setInterval(updateAnalog, 100);
+setInterval(updateSky, 30000);
+updateClock();
+updateAnalog();
+</script>
+</body>
+</html>

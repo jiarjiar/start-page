@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+.gh_token
+
+# 本地生成器/规则文件：只留在 ~/Documents/start-page-scraper/，不要放进公开仓库
+fetch_bookmarks.py
+update.sh
+pins.json
+custom.json

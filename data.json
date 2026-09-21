@@ -1,0 +1,327 @@
+{
+ "updated": "2026-09-21T14:55:05",
+ "items": [
+  {
+   "url": "https://chatgpt.com/",
+   "title": "ChatGPT",
+   "host": "chatgpt.com",
+   "folder": "AI",
+   "pinned": true
+  },
+  {
+   "url": "https://mail.google.com/mail/u/5/#inbox",
+   "title": "Gmail",
+   "host": "mail.google.com",
+   "folder": "常用",
+   "pinned": true
+  },
+  {
+   "url": "https://platform.kimi.ai/console/account",
+   "title": "Kimi API 平台",
+   "host": "platform.kimi.ai",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.kimi.com/",
+   "title": "Kimi 网页版",
+   "host": "kimi.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.101weiqi.com/",
+   "title": "101围棋网",
+   "host": "101weiqi.com",
+   "folder": "围棋",
+   "pinned": false
+  },
+  {
+   "url": "https://19x19.com/engine/index",
+   "title": "19×19 围棋AI引擎",
+   "host": "19x19.com",
+   "folder": "围棋",
+   "pinned": false
+  },
+  {
+   "url": "https://jiarjiar.github.io/umd-hours/",
+   "title": "UMD 开放时间 · UMD Hours",
+   "host": "jiarjiar.github.io",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://www.shidianguji.com/zh/",
+   "title": "识典古籍",
+   "host": "shidianguji.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://myleapdrivingacademy.com/driversedu/",
+   "title": "My Leap 驾校课程表",
+   "host": "myleapdrivingacademy.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://jiarjiar.wixsite.com/main",
+   "title": "Omnivers & Semicro 个人站",
+   "host": "jiarjiar.wixsite.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://discord.com/channels/@me",
+   "title": "Discord",
+   "host": "discord.com",
+   "folder": "社交",
+   "pinned": false
+  },
+  {
+   "url": "https://platform.deepseek.com/usage",
+   "title": "DeepSeek 开放平台",
+   "host": "platform.deepseek.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.bilibili.com/",
+   "title": "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+   "host": "bilibili.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://www.google.com/",
+   "title": "Google",
+   "host": "google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://www.nature.com/nature-index/",
+   "title": "Nature Index",
+   "host": "nature.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://calendar.google.com/calendar/u/4/r/week",
+   "title": "Google Calendar",
+   "host": "calendar.google.com",
+   "folder": "常用",
+   "pinned": false
+  },
+  {
+   "url": "https://www.amazon.com/",
+   "title": "Amazon",
+   "host": "amazon.com",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://www.linkedin.com/notifications/?filter=all",
+   "title": "Notifications | LinkedIn",
+   "host": "linkedin.com",
+   "folder": "社交",
+   "pinned": false
+  },
+  {
+   "url": "https://earth.google.com/web/?authuser=4",
+   "title": "earth.google.com",
+   "host": "earth.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://search.bilibili.com/",
+   "title": "B站搜索",
+   "host": "search.bilibili.com",
+   "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://translate.google.com/?sl=en&tl=zh-CN&op=translate",
+   "title": "Google Translate",
+   "host": "translate.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://zh.wikipedia.org/wiki/%E5%88%87%E8%90%A8%E7%9A%AE%E5%85%8B%E6%B9%BE",
+   "title": "切萨皮克湾 - 维基百科，自由的百科全书",
+   "host": "zh.wikipedia.org",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://outlook.office.com/mail/drafts",
+   "title": "Outlook",
+   "host": "outlook.office.com",
+   "folder": "常用",
+   "pinned": false
+  },
+  {
+   "url": "https://drive.google.com/drive/u/4/my-drive",
+   "title": "My Drive - Google Drive",
+   "host": "drive.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://onlinelibrary.wiley.com/",
+   "title": "Wiley Online Library",
+   "host": "advanced.onlinelibrary.wiley.com",
+   "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://www.researchgate.net/",
+   "title": "ResearchGate",
+   "host": "researchgate.net",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://gemini.google.com/app",
+   "title": "Gemini",
+   "host": "gemini.google.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://www.nanocenter.umd.edu/scheduler/ctrlpnl.php",
+   "title": "My Control Panel",
+   "host": "nanocenter.umd.edu",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://remotedesktop.google.com/u/4/access/",
+   "title": "Chrome Remote Desktop",
+   "host": "remotedesktop.google.com",
+   "folder": "工具",
+   "pinned": false
+  },
+  {
+   "url": "https://www.thorlabs.com/",
+   "title": "Thorlabs · Home",
+   "host": "thorlabs.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://map.baidu.com/",
+   "title": "百度地图",
+   "host": "map.baidu.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://chat.deepseek.com/",
+   "title": "DeepSeek",
+   "host": "chat.deepseek.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://sites.google.com/site/makshangroup/jie-shan?authuser=0",
+   "title": "Two-Dimensional Quantum Materials - Jie Shan",
+   "host": "sites.google.com",
+   "folder": "归档",
+   "pinned": false
+  },
+  {
+   "url": "https://cgong.weebly.com/",
+   "title": "GONG LAB - Home",
+   "host": "cgong.weebly.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://baike.baidu.com/",
+   "title": "百度百科",
+   "host": "baike.baidu.com",
+   "folder": "其他",
+   "pinned": false
+  },
+  {
+   "url": "https://www.science.org/doi/10.1126/sciadv.aba8834",
+   "title": "Nematicity with a twist: Rotational symmetry breaking in a moiré superlattice | Science Advances",
+   "host": "science.org",
+   "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://www.myworkday.com/umd/d/home.htmld",
+   "title": "Home - Workday",
+   "host": "myworkday.com",
+   "folder": "UMD",
+   "pinned": false
+  },
+  {
+   "url": "https://pubs.acs.org/doi/abs/10.1021/acsphotonics.4c00255",
+   "title": "pubs.acs.org",
+   "host": "pubs.acs.org",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://live.bilibili.com/",
+   "title": "哔哩哔哩直播，二次元弹幕直播平台",
+   "host": "live.bilibili.com",
+   "folder": "视频",
+   "pinned": false
+  },
+  {
+   "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/adma.201907148",
+   "title": "onlinelibrary.wiley.com",
+   "host": "onlinelibrary.wiley.com",
+   "folder": "文献",
+   "pinned": false
+  },
+  {
+   "url": "https://www.bestbuy.com/",
+   "title": "Best Buy | Official Online Store | Shop Now & Save",
+   "host": "bestbuy.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://www.xiaohongshu.com/explore",
+   "title": "小红书 - 你的生活兴趣社区",
+   "host": "xiaohongshu.com",
+   "folder": "社交",
+   "pinned": false
+  },
+  {
+   "url": "https://github.com/",
+   "title": "GitHub",
+   "host": "github.com",
+   "folder": "work",
+   "pinned": false
+  },
+  {
+   "url": "https://z.ai/manage-apikey/subscription",
+   "title": "Z.ai - Inspiring AGI to Benefit Humanity",
+   "host": "z.ai",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
+   "url": "https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.4.L012032",
+   "title": "Moiré flat Chern bands and correlated quantum anomalous Hall states generated by spin-orbit couplings in twisted homobilayer | Phys. Rev. Research",
+   "host": "journals.aps.org",
+   "folder": "KE",
+   "pinned": false
+  },
+  {
+   "url": "https://one.google.com/storage?i=m",
+   "title": "one.google.com",
+   "host": "one.google.com",
+   "folder": "工具",
+   "pinned": false
+  }
+ ]
+}
