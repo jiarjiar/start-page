@@ -107,7 +107,7 @@
    "pinned": false
   },
   {
-   "url": "https://calendar.google.com/calendar/u/4/r/week",
+   "url": "https://calendar.google.com/calendar/u/1/r/week",
    "title": "Google Calendar",
    "host": "calendar.google.com",
    "folder": "常用",
@@ -198,7 +198,7 @@
    "pinned": false
   },
   {
-   "url": "https://remotedesktop.google.com/u/4/access/",
+   "url": "https://remotedesktop.google.com/u/1/access/?pageId=none",
    "title": "Chrome Remote Desktop",
    "host": "remotedesktop.google.com",
    "folder": "工具",
