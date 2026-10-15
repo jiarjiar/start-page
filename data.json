@@ -226,6 +226,13 @@
    "pinned": false
   },
   {
+   "url": "https://status.deepseek.com/",
+   "title": "DeepSeek 状态",
+   "host": "status.deepseek.com",
+   "folder": "AI",
+   "pinned": false
+  },
+  {
    "url": "https://sites.google.com/site/makshangroup/jie-shan?authuser=0",
    "title": "Two-Dimensional Quantum Materials - Jie Shan",
    "host": "sites.google.com",
